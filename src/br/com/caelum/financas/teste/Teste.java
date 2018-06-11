@@ -9,7 +9,8 @@ public class Teste {
 
 	public static void main(String[] args) {
 		
-		Conta conta = new Conta();
+		/* Criar conta
+		 * Conta conta = new Conta();
 		conta.setTitular("Leonardo");
 		conta.setBanco("Caixa Economica");
 		conta.setAgencia("123");
@@ -21,7 +22,18 @@ public class Teste {
 		em.persist(conta);
 		em.getTransaction().commit();
 		
-		em.close();
+		em.close();*/
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+		
+		Conta conta = em.find(Conta.class, 1);
+		
+		conta.setTitular("Ramon Pires");
+		
+		System.out.println(conta);
+		
+		em.getTransaction().commit();
 
 	}
 

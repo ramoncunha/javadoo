@@ -46,4 +46,9 @@ public class Conta {
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
+	@Override
+	public String toString() {
+		return "Conta [id=" + id + ", titular=" + titular + ", numero=" + numero + ", banco=" + banco + ", agencia="
+				+ agencia + "]";
+	}
 }
