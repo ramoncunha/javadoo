@@ -24,7 +24,7 @@ public class Teste {
 		
 		em.close();*/
 		
-		EntityManager em = new JPAUtil().getEntityManager();
+		EntityManager em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		
 		Conta conta = em.find(Conta.class, 1);
