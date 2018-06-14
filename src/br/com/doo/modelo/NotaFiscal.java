@@ -1,6 +1,7 @@
 package br.com.doo.modelo;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -32,6 +34,9 @@ public class NotaFiscal {
 	private Pessoa emitente;
 	@ManyToOne
 	private Pessoa destinatario;
+	
+	@ManyToMany
+	private List<Itens> itens;
 	
 	private String informacoesComplementares;
 	
@@ -82,6 +87,12 @@ public class NotaFiscal {
 	}
 	public void setDestinatario(Pessoa destinatario) {
 		this.destinatario = destinatario;
+	}
+	public List<Itens> getItens() {
+		return itens;
+	}
+	public void setItens(List<Itens> itens) {
+		this.itens = itens;
 	}
 	public String getInformacoesComplementares() {
 		return informacoesComplementares;
