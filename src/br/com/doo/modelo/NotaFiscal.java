@@ -33,11 +33,52 @@ public class NotaFiscal {
 	@ManyToOne
 	private Pessoa destinatario;
 	
-	
-	
-	
-	
-	
-	
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getNumeroNota() {
+		return numeroNota;
+	}
+	public void setNumeroNota(Integer numeroNota) {
+		this.numeroNota = numeroNota;
+	}
+	public ModeloNF getModelo() {
+		return modelo;
+	}
+	public void setModelo(ModeloNF modelo) {
+		this.modelo = modelo;
+	}
+	public NaturezaNF getNatureza() {
+		return natureza;
+	}
+	public void setNatureza(NaturezaNF natureza) {
+		this.natureza = natureza;
+	}
+	public Calendar getDataOperacao() {
+		return dataOperacao;
+	}
+	public void setDataOperacao(Calendar dataOperacao) {
+		this.dataOperacao = dataOperacao;
+	}
+	public Calendar getDataEmissao() {
+		return dataEmissao;
+	}
+	public void setDataEmissao(Calendar dataEmissao) {
+		this.dataEmissao = dataEmissao;
+	}
+	public Pessoa getEmitente() {
+		return emitente;
+	}
+	public void setEmitente(Pessoa emitente) {
+		this.emitente = emitente;
+	}
+	public Pessoa getDestinatario() {
+		return destinatario;
+	}
+	public void setDestinatario(Pessoa destinatario) {
+		this.destinatario = destinatario;
+	}	
 }
