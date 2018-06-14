@@ -13,8 +13,8 @@ public class Itens {
 	private Integer id;
 	private Integer codigo;
 	private String descricao;
+	private Double preco;
 	private Integer quantidade;
-	private Double valor;
 	
 	public Integer getId() {
 		return id;
@@ -41,9 +41,9 @@ public class Itens {
 		this.quantidade = quantidade;
 	}
 	public Double getValor() {
-		return valor;
+		return preco;
 	}
 	public void setValor(Double valor) {
-		this.valor = valor;
+		this.preco = valor;
 	}
 }
