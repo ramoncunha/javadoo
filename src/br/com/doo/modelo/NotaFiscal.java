@@ -33,6 +33,8 @@ public class NotaFiscal {
 	@ManyToOne
 	private Pessoa destinatario;
 	
+	private String informacoesComplementares;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -80,5 +82,11 @@ public class NotaFiscal {
 	}
 	public void setDestinatario(Pessoa destinatario) {
 		this.destinatario = destinatario;
-	}	
+	}
+	public String getInformacoesComplementares() {
+		return informacoesComplementares;
+	}
+	public void setInformacoesComplementares(String informacoesComplementares) {
+		this.informacoesComplementares = informacoesComplementares;
+	}
 }
