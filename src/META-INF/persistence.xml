@@ -11,7 +11,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Aqui são listadas todas as entidades -->
-        <class>br.com.caelum.financas.modelo.NotaFiscal</class>
+        <class>br.com.doo.modelo.NotaFiscal</class>
+        <class>br.com.doo.modelo.PessoaFisica</class>
+        <class>br.com.doo.modelo.PessoaJuridica</class>
+        <class>br.com.doo.modelo.Itens</class>
 
         <properties>
             <!-- Propriedades JDBC -->
