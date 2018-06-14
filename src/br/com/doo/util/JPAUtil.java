@@ -9,7 +9,7 @@ public final class JPAUtil {
 		
 	}
 	
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("financas");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("doonfe");
 	
 	public static EntityManager getEntityManager () {
 		return emf.createEntityManager();
