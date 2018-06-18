@@ -1,23 +1,23 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String estado;
 	
 	public Integer getId() {
 		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getEstado() {
 		return estado;
