@@ -11,10 +11,11 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Aqui são listadas todas as entidades -->
-        <class>br.com.doonfe.modelo.NotaFiscal</class>
+        <class>br.com.doonfe.modelo.NotaFiscal</class>        
+        <class>br.com.doonfe.modelo.Itens</class>
+        <class>br.com.doonfe.modelo.Pessoa</class>
         <class>br.com.doonfe.modelo.PessoaFisica</class>
         <class>br.com.doonfe.modelo.PessoaJuridica</class>
-        <class>br.com.doonfe.modelo.Itens</class>
 
         <properties>
             <!-- Propriedades JDBC -->
