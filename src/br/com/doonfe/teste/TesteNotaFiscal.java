@@ -1,12 +1,12 @@
 package br.com.doonfe.teste;
 
-import java.util.Arrays;
+/*import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
 import br.com.doonfe.modelo.*;
-import br.com.doonfe.util.JPAUtil;
+import br.com.doonfe.util.JPAUtil;*/
 
 public class TesteNotaFiscal {
 
