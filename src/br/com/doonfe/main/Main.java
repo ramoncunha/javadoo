@@ -2,6 +2,7 @@ package br.com.doonfe.main;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
@@ -102,6 +103,21 @@ public class Main {
 		JTable table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(model);
+		
+		ActionListener ExcluirLinha = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int linha = table.getSelectedRow();
+					if(linha != -1)
+						model.removeRow(linha);
+				} catch(ArrayIndexOutOfBoundsException e) {
+					System.out.println(e);
+				}
+			}
+		};
+		
+		btnExcluir.addActionListener(ExcluirLinha);
 		
 		JScrollPane jScrollPane = new JScrollPane();
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
