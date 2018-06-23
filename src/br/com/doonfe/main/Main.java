@@ -3,7 +3,10 @@ package br.com.doonfe.main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +18,9 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.doonfe.modelo.NotaFiscal;
+import br.com.doonfe.util.JPAUtil;
 
 public class Main {
 
@@ -65,6 +71,20 @@ public class Main {
 		toolbar.add(btnExcluir);
 		toolbar.add(btnDetalhes);
 		/* ****************FIM JTOOLBAR**************** */
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		em.getTransaction().begin();
+		
+		String jpql = "select m from NotaFiscal m";
+		Query query = em.createQuery(jpql);
+		
+		List<NotaFiscal> resultados = query.getResultList();
+		for (NotaFiscal notaFiscal : resultados) {
+			System.out.println(notaFiscal.getInformacoesComplementares());
+		}
+		
+		em.getTransaction().commit();
+		em.close();
 		
 		Object[] colunas = new String[]{"Número", "Modelo", "Natureza"};
 		Object[][] dados = new Object[][]{
