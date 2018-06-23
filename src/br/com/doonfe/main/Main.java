@@ -72,6 +72,11 @@ public class Main {
 		toolbar.add(btnDetalhes);
 		/* ****************FIM JTOOLBAR**************** */
 		
+		Object[] colunas = new String[]{"N Nota", "Modelo", "Natureza", "Dt Emissão", "Destinatario", "Emitente"};
+		Object[][] dados = new Object[][]{};
+		
+		DefaultTableModel model = new DefaultTableModel(dados, colunas);
+		
 		EntityManager em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		
@@ -79,20 +84,20 @@ public class Main {
 		Query query = em.createQuery(jpql);
 		
 		List<NotaFiscal> resultados = query.getResultList();
+		
 		for (NotaFiscal notaFiscal : resultados) {
-			System.out.println(notaFiscal.getInformacoesComplementares());
+			model.addRow(new Object[] {
+					notaFiscal.getNumeroNota(),
+					notaFiscal.getModelo(),
+					notaFiscal.getNatureza(),
+					notaFiscal.getDataEmissao(),
+					notaFiscal.getDestinatario(),
+					notaFiscal.getEmitente()
+			});
 		}
 		
 		em.getTransaction().commit();
 		em.close();
-		
-		Object[] colunas = new String[]{"Número", "Modelo", "Natureza"};
-		Object[][] dados = new Object[][]{
-			{"Rodrigo", "A", "B"},
-			{"C", "D", "E"}
-		};
-		
-		DefaultTableModel model = new DefaultTableModel(dados, colunas);
 		
 		JTable table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
