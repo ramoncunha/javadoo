@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -80,19 +78,15 @@ public class Main {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(model);
 		
-		JScrollPane painelTabela = new JScrollPane();
-		painelTabela.setViewportView(table);
-		
-		JPanel tabela = new JPanel();
-		tabela.setLayout(new BoxLayout(tabela, BoxLayout.X_AXIS));
-		tabela.add(table);
-		
+		JScrollPane jScrollPane = new JScrollPane();
+		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jScrollPane.setViewportView(table);
 		
 		JFrame frame = new JFrame("Tela Inicial");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(toolbar, BorderLayout.PAGE_START);
 		frame.setJMenuBar(menubar);
-		frame.add(tabela);
+		frame.add(jScrollPane);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 	}
