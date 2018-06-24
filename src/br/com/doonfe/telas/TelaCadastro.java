@@ -1,14 +1,22 @@
 package br.com.doonfe.telas;
 
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
+
+import br.com.doonfe.modelo.Itens;
+import br.com.doonfe.util.JPAUtil;
 
 public class TelaCadastro {
 
@@ -38,7 +46,7 @@ public class TelaCadastro {
 		
 		/* JPane Formulário Nota Fiscal */
 		JPanel formularioNF = new JPanel();
-		//formularioNF.setLayout(new BoxLayout(formularioNF, BoxLayout.Y_AXIS));
+		formularioNF.setLayout(new BoxLayout(formularioNF, BoxLayout.Y_AXIS));
 		formularioNF.add(new JLabel("N Nota"));
 		formularioNF.add(campoNNota);
 		formularioNF.add(new JLabel("Modelo"));
@@ -52,8 +60,7 @@ public class TelaCadastro {
 		
 		/* JPane Formulário Pessoa */
 		JPanel formularioPessoa = new JPanel();
-		//LayoutManager layoutPessoa = new FlowLayout(FlowLayout.RIGHT);
-		//formularioPessoa.setLayout(layoutPessoa);
+		formularioPessoa.setLayout(new BoxLayout(formularioPessoa, BoxLayout.Y_AXIS));
 		formularioPessoa.add(new JLabel("EMITENTE"));
 		formularioPessoa.add(new JLabel("CNPJ/CPF"));
 		formularioPessoa.add(campoDocumento1);
@@ -74,9 +81,48 @@ public class TelaCadastro {
 		formularioPessoa.add(new JLabel("Estado"));
 		formularioPessoa.add(campoEstado2);
 		
+		/* Lista de Itens */
+		JPanel listaItens = new JPanel();
+		listaItens.setLayout(new BoxLayout(listaItens, BoxLayout.Y_AXIS));
+		Object[] colunas = new String[]{"Código", "Descrição", "Preço", "Qtd", "Total"};
+		Object[][] dados = new Object[][]{};
+		
+		DefaultTableModel model = new DefaultTableModel(dados, colunas);
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		em.getTransaction().begin();
+		
+		String jpql = "select m from Itens m";
+		Query query = em.createQuery(jpql);
+		
+		List<Itens> resultados = query.getResultList();
+		
+		for (Itens item : resultados) {
+			model.addRow(new Object[] {
+					item.getCodigo(),
+					item.getDescricao(),
+					item.getValor(),
+					item.getQuantidade()
+			});
+		}
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		JTable table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(model);
+		
+		JScrollPane jScrollPane = new JScrollPane();
+		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jScrollPane.setViewportView(table);
+		listaItens.add(jScrollPane);
+		/* FIM LISTAGEM ITENS  */
+		
 		JPanel pai = new JPanel();
 		pai.add(formularioNF);
 		pai.add(formularioPessoa);
+		pai.add(listaItens);
 		pai.setLayout(new BoxLayout(pai, BoxLayout.X_AXIS));
 		
 		JFrame janela = new JFrame();
