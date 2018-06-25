@@ -52,6 +52,7 @@ public class TelaCadastro {
 		JTextField campoDescricao = new JTextField(15);
 		JTextField campoPreco = new JTextField(15);
 		JTextField campoQtd = new JTextField(15);
+		JButton salvarItem = new JButton("Inserir");		
 		
 		/* JPane Formulário Nota Fiscal */
 		JPanel formularioNF = new JPanel();
@@ -103,6 +104,7 @@ public class TelaCadastro {
 		paiPanelPessoa.add(destinatarioPanel);
 		formularioNF.add(paiPanelPessoa);
 		
+		/* JPanel Item */
 		JPanel camposItem = new JPanel();
 		camposItem.setLayout(new BoxLayout(camposItem, BoxLayout.Y_AXIS));
 		camposItem.setBorder(BorderFactory.createTitledBorder("ITEM"));
@@ -113,8 +115,8 @@ public class TelaCadastro {
 		camposItem.add(new JLabel("Preço"));
 		camposItem.add(campoPreco);
 		camposItem.add(new JLabel("Quantidade"));
-		camposItem.add(campoQtd);		
-		
+		camposItem.add(campoQtd);
+		camposItem.add(salvarItem);		
 		formularioNF.add(camposItem);
 		
 		/* Lista de Itens */
