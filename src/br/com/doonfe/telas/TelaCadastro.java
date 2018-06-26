@@ -65,6 +65,7 @@ public class TelaCadastro {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = new NotaFiscal();
 					nf.setNumeroNota(Integer.parseInt(camposNota.getCampoNNota().getText()));
 					nf.setNatureza(NaturezaNF.VENDA);
@@ -79,6 +80,7 @@ public class TelaCadastro {
 						pessoaEmitente1.setCpf(camposPessoa.getCampoDocumento1().getText());
 						pessoaEmitente1.setEstado(camposPessoa.getCampoEstado1().getText());
 						nf.setEmitente(pessoaEmitente1);
+						persistNF.salvarPessoa(pessoaEmitente1);
 					} else {
 						PessoaJuridica pessoaEmitente2 = new PessoaJuridica();
 						pessoaEmitente2.setCnpj(camposPessoa.getCampoDocumento1().getText());
@@ -86,21 +88,24 @@ public class TelaCadastro {
 						pessoaEmitente2.setRazaoSocial(camposPessoa.getCampoNome1().getText());
 						pessoaEmitente2.setEstado(camposPessoa.getCampoEstado1().getText());
 						nf.setEmitente(pessoaEmitente2);
+						persistNF.salvarPessoa(pessoaEmitente2);
 					}
 					
 					if(camposPessoa.getCampoInscricao2().getText() == "") {
 						PessoaFisica pessoaDestinatario1 = new PessoaFisica();
-						pessoaDestinatario1.setNome(camposPessoa.getCampoNome1().getText());
-						pessoaDestinatario1.setCpf(camposPessoa.getCampoDocumento1().getText());
-						pessoaDestinatario1.setEstado(camposPessoa.getCampoEstado1().getText());
+						pessoaDestinatario1.setNome(camposPessoa.getCampoNome2().getText());
+						pessoaDestinatario1.setCpf(camposPessoa.getCampoDocumento2().getText());
+						pessoaDestinatario1.setEstado(camposPessoa.getCampoEstado2().getText());
 						nf.setDestinatario(pessoaDestinatario1);
+						persistNF.salvarPessoa(pessoaDestinatario1);
 					} else {
 						PessoaJuridica pessoaDestinatario2 = new PessoaJuridica();
-						pessoaDestinatario2.setCnpj(camposPessoa.getCampoDocumento1().getText());
-						pessoaDestinatario2.setInscricaoEstadual(camposPessoa.getCampoInscricao1().getText());
-						pessoaDestinatario2.setRazaoSocial(camposPessoa.getCampoNome1().getText());
-						pessoaDestinatario2.setEstado(camposPessoa.getCampoEstado1().getText());
+						pessoaDestinatario2.setCnpj(camposPessoa.getCampoDocumento2().getText());
+						pessoaDestinatario2.setInscricaoEstadual(camposPessoa.getCampoInscricao2().getText());
+						pessoaDestinatario2.setRazaoSocial(camposPessoa.getCampoNome2().getText());
+						pessoaDestinatario2.setEstado(camposPessoa.getCampoEstado2().getText());
 						nf.setDestinatario(pessoaDestinatario2);
+						persistNF.salvarPessoa(pessoaDestinatario2);
 					}
 					
 					Itens item1 = new Itens();
@@ -108,12 +113,11 @@ public class TelaCadastro {
 					item1.setDescricao("Biscoito");
 					item1.setQuantidade(5);
 					item1.setValor(50.0);
-					
 					nf.setItens(Arrays.asList(item1));
+					persistNF.salvarItens(item1);
 					
-					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					persistNF.salvarNotaFiscal(nf);
-							
+					
 				} catch (Exception e1) {
 					System.out.println(e1);
 				}
