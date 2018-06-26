@@ -63,4 +63,9 @@ public class FormularioNotaFiscal {
 		
 		return camposNota;
 	}
+	//	public NotaFiscal toNotaFiscal() {
+//		NotaFiscal nf = new NotaFiscal();
+//		nf.setNatureza(campoNatureza.getText().toString());
+//		return nf;
+//	}
 }
