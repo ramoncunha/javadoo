@@ -1,14 +1,14 @@
 package br.com.doonfe.telas;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,16 +18,24 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.componentes.BotaoCadastro;
 import br.com.doonfe.componentes.FormularioItem;
 import br.com.doonfe.componentes.FormularioNotaFiscal;
 import br.com.doonfe.componentes.FormularioPessoa;
 import br.com.doonfe.componentes.MenuBar;
+import br.com.doonfe.dao.NotaFiscalDAO;
 import br.com.doonfe.modelo.Itens;
+import br.com.doonfe.modelo.ModeloNF;
+import br.com.doonfe.modelo.NaturezaNF;
+import br.com.doonfe.modelo.NotaFiscal;
+import br.com.doonfe.modelo.PessoaFisica;
+import br.com.doonfe.modelo.PessoaJuridica;
 import br.com.doonfe.util.JPAUtil;
 
 public class TelaCadastro {
 
 	public void render() {
+		
 		JPanel formularioNF = new JPanel();
 		formularioNF.setLayout(new BoxLayout(formularioNF, BoxLayout.Y_AXIS));
 		
@@ -43,11 +51,82 @@ public class TelaCadastro {
 		JScrollPane jScrollPane = listarItensNF();
 		formularioNF.add(jScrollPane);
 		
-		JPanel painelBotoes = botoesCadastro();
+		ActionListener cancelarCadastro = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog(null,"Você tem certeza que deseja cancelar?");
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					// ir para tela principal
+				}
+			}
+		};
+		
+		ActionListener salvarCadastro = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					NotaFiscal nf = new NotaFiscal();
+					nf.setNumeroNota(Integer.parseInt(camposNota.getCampoNNota().getText()));
+					nf.setNatureza(NaturezaNF.VENDA);
+					nf.setModelo(ModeloNF.MODELO1_A);
+					nf.setDataOperacao(Calendar.getInstance());
+					nf.setDataEmissao(Calendar.getInstance());
+					nf.setInformacoesComplementares(camposNota.getCampoInformacoesComplementares().getText());
+					
+					if(camposPessoa.getCampoInscricao1().getText() == "") {
+						PessoaFisica pessoaEmitente1 = new PessoaFisica();
+						pessoaEmitente1.setNome(camposPessoa.getCampoNome1().getText());
+						pessoaEmitente1.setCpf(camposPessoa.getCampoDocumento1().getText());
+						pessoaEmitente1.setEstado(camposPessoa.getCampoEstado1().getText());
+						nf.setEmitente(pessoaEmitente1);
+					} else {
+						PessoaJuridica pessoaEmitente2 = new PessoaJuridica();
+						pessoaEmitente2.setCnpj(camposPessoa.getCampoDocumento1().getText());
+						pessoaEmitente2.setInscricaoEstadual(camposPessoa.getCampoInscricao1().getText());
+						pessoaEmitente2.setRazaoSocial(camposPessoa.getCampoNome1().getText());
+						pessoaEmitente2.setEstado(camposPessoa.getCampoEstado1().getText());
+						nf.setEmitente(pessoaEmitente2);
+					}
+					
+					if(camposPessoa.getCampoInscricao2().getText() == "") {
+						PessoaFisica pessoaDestinatario1 = new PessoaFisica();
+						pessoaDestinatario1.setNome(camposPessoa.getCampoNome1().getText());
+						pessoaDestinatario1.setCpf(camposPessoa.getCampoDocumento1().getText());
+						pessoaDestinatario1.setEstado(camposPessoa.getCampoEstado1().getText());
+						nf.setDestinatario(pessoaDestinatario1);
+					} else {
+						PessoaJuridica pessoaDestinatario2 = new PessoaJuridica();
+						pessoaDestinatario2.setCnpj(camposPessoa.getCampoDocumento1().getText());
+						pessoaDestinatario2.setInscricaoEstadual(camposPessoa.getCampoInscricao1().getText());
+						pessoaDestinatario2.setRazaoSocial(camposPessoa.getCampoNome1().getText());
+						pessoaDestinatario2.setEstado(camposPessoa.getCampoEstado1().getText());
+						nf.setDestinatario(pessoaDestinatario2);
+					}
+					
+					Itens item1 = new Itens();
+					item1.setCodigo(1789);
+					item1.setDescricao("Biscoito");
+					item1.setQuantidade(5);
+					item1.setValor(50.0);
+					
+					nf.setItens(Arrays.asList(item1));
+					
+					NotaFiscalDAO persistNF = new NotaFiscalDAO();
+					persistNF.salvarNotaFiscal(nf);
+							
+				} catch (Exception e1) {
+					System.out.println(e1);
+				}
+			}
+		};
+		
+		BotaoCadastro painelBotoes = new BotaoCadastro();
+		painelBotoes.setCancelAction(cancelarCadastro);
+		painelBotoes.setSaveAction(salvarCadastro);
 		
 		JPanel pai = new JPanel();
 		pai.add(formularioNF);
-		pai.add(painelBotoes);
+		pai.add(painelBotoes.buildBotaoFormulario());
 		pai.setLayout(new BoxLayout(pai, BoxLayout.Y_AXIS));
 		JScrollPane jScrollPanePai = new JScrollPane();
 		jScrollPanePai.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -62,27 +141,6 @@ public class TelaCadastro {
 		janela.setJMenuBar(menubar.build());
 		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		janela.setVisible(true);
-	}
-
-	private JPanel botoesCadastro() {
-		JPanel painelBotoes = new JPanel();
-		painelBotoes.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		JButton btnSalvar = new JButton("Salvar");
-		JButton btnCancelar = new JButton("Cancelar");
-		painelBotoes.add(btnSalvar);
-		painelBotoes.add(btnCancelar);
-		
-		btnCancelar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				int dialogResult = JOptionPane.showConfirmDialog(null,"Você tem certeza que deseja cancelar?");
-				if(dialogResult == JOptionPane.YES_OPTION) {
-					// ir para tela principal
-				}
-			}
-		});
-		
-		return painelBotoes;
 	}
 
 	private JScrollPane listarItensNF() {
