@@ -1,9 +1,11 @@
 package br.com.doonfe.telas;
 
+import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,46 +47,79 @@ public class TelaCadastro {
 		JTextField campoInscricao2 = new JTextField(15);
 		JTextField campoEstado2 = new JTextField(5);
 		
+		/* Campos formulário Itens */
+		JTextField campoCodigo = new JTextField(15);
+		JTextField campoDescricao = new JTextField(15);
+		JTextField campoPreco = new JTextField(15);
+		JTextField campoQtd = new JTextField(15);
+		JButton salvarItem = new JButton("Inserir");		
+		
 		/* JPane Formulário Nota Fiscal */
 		JPanel formularioNF = new JPanel();
 		formularioNF.setLayout(new BoxLayout(formularioNF, BoxLayout.Y_AXIS));
-		formularioNF.add(new JLabel("N Nota"));
-		formularioNF.add(campoNNota);
-		formularioNF.add(new JLabel("Modelo"));
-		formularioNF.add(campoModelo);
-		formularioNF.add(new JLabel("Natureza"));
-		formularioNF.add(campoNatureza);
-		formularioNF.add(new JLabel("Data da Operação"));
-		formularioNF.add(campoDtOperacao);
-		formularioNF.add(new JLabel("Data da Emissão"));
-		formularioNF.add(campoDtEmissao);
 		
-		/* JPane Formulário Pessoa */
-		JPanel formularioPessoa = new JPanel();
-		formularioPessoa.setLayout(new BoxLayout(formularioPessoa, BoxLayout.Y_AXIS));
-		formularioPessoa.add(new JLabel("EMITENTE"));
-		formularioPessoa.add(new JLabel("CNPJ/CPF"));
-		formularioPessoa.add(campoDocumento1);
-		formularioPessoa.add(new JLabel("Razão Social/Nome"));
-		formularioPessoa.add(campoNome1);
-		formularioPessoa.add(new JLabel("Inscrição Estadual"));
-		formularioPessoa.add(campoInscricao1);
-		formularioPessoa.add(new JLabel("Estado"));
-		formularioPessoa.add(campoEstado1);
+		JPanel camposNota = new JPanel();
+		camposNota.setLayout(new BoxLayout(camposNota, BoxLayout.Y_AXIS));
+		camposNota.add(new JLabel("N Nota"));
+		camposNota.add(campoNNota);
+		camposNota.add(new JLabel("Modelo"));
+		camposNota.add(campoModelo);
+		camposNota.add(new JLabel("Natureza"));
+		camposNota.add(campoNatureza);
+		camposNota.add(new JLabel("Data da Operação"));
+		camposNota.add(campoDtOperacao);
+		camposNota.add(new JLabel("Data da Emissão"));
+		camposNota.add(campoDtEmissao);
+		formularioNF.add(camposNota);
 		
-		formularioPessoa.add(new JLabel("DESTINATARIO"));
-		formularioPessoa.add(new JLabel("CNPJ/CPF"));
-		formularioPessoa.add(campoDocumento2);
-		formularioPessoa.add(new JLabel("Razão Social/Nome"));
-		formularioPessoa.add(campoNome2);
-		formularioPessoa.add(new JLabel("Inscrição Estadual"));
-		formularioPessoa.add(campoInscricao2);
-		formularioPessoa.add(new JLabel("Estado"));
-		formularioPessoa.add(campoEstado2);
+		/* JPane Pessoa Emitente */
+		JPanel emitentePanel = new JPanel();
+		emitentePanel.setBorder(BorderFactory.createTitledBorder("EMITENTE"));
+		emitentePanel.setLayout(new BoxLayout(emitentePanel, BoxLayout.Y_AXIS));
+		emitentePanel.add(new JLabel("CNPJ/CPF"));
+		emitentePanel.add(campoDocumento1);
+		emitentePanel.add(new JLabel("Razão Social/Nome"));
+		emitentePanel.add(campoNome1);
+		emitentePanel.add(new JLabel("Inscrição Estadual"));
+		emitentePanel.add(campoInscricao1);
+		emitentePanel.add(new JLabel("Estado"));
+		emitentePanel.add(campoEstado1);
+		
+		/* JPane Pessoa Destinatario */
+		JPanel destinatarioPanel = new JPanel();
+		destinatarioPanel.setBorder(BorderFactory.createTitledBorder("DESTINATÁRIO"));
+		destinatarioPanel.setLayout(new BoxLayout(destinatarioPanel, BoxLayout.Y_AXIS));
+		destinatarioPanel.add(new JLabel("CNPJ/CPF"));
+		destinatarioPanel.add(campoDocumento2);
+		destinatarioPanel.add(new JLabel("Razão Social/Nome"));
+		destinatarioPanel.add(campoNome2);
+		destinatarioPanel.add(new JLabel("Inscrição Estadual"));
+		destinatarioPanel.add(campoInscricao2);
+		destinatarioPanel.add(new JLabel("Estado"));
+		destinatarioPanel.add(campoEstado2);
+		
+		JPanel paiPanelPessoa = new JPanel();
+		paiPanelPessoa.setLayout(new BoxLayout(paiPanelPessoa, BoxLayout.X_AXIS));
+		paiPanelPessoa.add(emitentePanel);
+		paiPanelPessoa.add(destinatarioPanel);
+		formularioNF.add(paiPanelPessoa);
+		
+		/* JPanel Item */
+		JPanel camposItem = new JPanel();
+		camposItem.setLayout(new BoxLayout(camposItem, BoxLayout.Y_AXIS));
+		camposItem.setBorder(BorderFactory.createTitledBorder("ITEM"));
+		camposItem.add(new JLabel("Código"));
+		camposItem.add(campoCodigo);
+		camposItem.add(new JLabel("Descrição"));
+		camposItem.add(campoDescricao);
+		camposItem.add(new JLabel("Preço"));
+		camposItem.add(campoPreco);
+		camposItem.add(new JLabel("Quantidade"));
+		camposItem.add(campoQtd);
+		camposItem.add(salvarItem);		
+		formularioNF.add(camposItem);
 		
 		/* Lista de Itens */
-		JPanel listaItens = new JPanel();
-		listaItens.setLayout(new BoxLayout(listaItens, BoxLayout.X_AXIS));
 		Object[] colunas = new String[]{"Código", "Descrição", "Preço", "Qtd", "Total"};
 		Object[][] dados = new Object[][]{};
 		
@@ -94,7 +129,7 @@ public class TelaCadastro {
 		em.getTransaction().begin();
 		
 		String jpql = "select m from Itens m";
-		Query query = em.createQuery(jpql);
+		TypedQuery<Itens> query = em.createQuery(jpql, Itens.class);
 		
 		List<Itens> resultados = query.getResultList();
 		
@@ -117,26 +152,28 @@ public class TelaCadastro {
 		JScrollPane jScrollPane = new JScrollPane();
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		jScrollPane.setViewportView(table);
-		listaItens.add(jScrollPane);
+		formularioNF.add(jScrollPane);
 		/* FIM LISTAGEM ITENS  */
 		
-		JPanel painelBtn = new JPanel();
-		painelBtn.setLayout(new BoxLayout(painelBtn, BoxLayout.X_AXIS));
+		JPanel painelBotoes = new JPanel();
+		painelBotoes.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		JButton btnSalvar = new JButton("Salvar");
-		painelBtn.add(btnSalvar);
-		
+		JButton btnCancelar = new JButton("Cancelar");
+		painelBotoes.add(btnSalvar);
+		painelBotoes.add(btnCancelar);
 		
 		JPanel pai = new JPanel();
 		pai.add(formularioNF);
-		pai.add(formularioPessoa);
-		pai.add(listaItens);
-		pai.add(painelBtn);
+		pai.add(painelBotoes);
 		pai.setLayout(new BoxLayout(pai, BoxLayout.Y_AXIS));
+		JScrollPane jScrollPanePai = new JScrollPane();
+		jScrollPanePai.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jScrollPanePai.setViewportView(pai);
 		
 		JFrame janela = new JFrame();
 		janela.setTitle("Cadastro");
 		janela.setSize(800, 600);
-		janela.add(pai);
+		janela.add(jScrollPanePai);
 		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		janela.setVisible(true);
 	}
