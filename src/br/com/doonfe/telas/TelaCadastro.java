@@ -111,6 +111,8 @@ public class TelaCadastro {
 					item1.setValor(50.0);
 					nf.setItens(Arrays.asList(item1));
 					
+					nf.addItem(item1);
+					
 					persistNF.salvarNotaFiscal(nf);
 					
 				} catch (Exception e1) {
