@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -83,7 +84,7 @@ public class TelaCadastro {
 		
 		/* Lista de Itens */
 		JPanel listaItens = new JPanel();
-		listaItens.setLayout(new BoxLayout(listaItens, BoxLayout.Y_AXIS));
+		listaItens.setLayout(new BoxLayout(listaItens, BoxLayout.X_AXIS));
 		Object[] colunas = new String[]{"Código", "Descrição", "Preço", "Qtd", "Total"};
 		Object[][] dados = new Object[][]{};
 		
@@ -119,11 +120,18 @@ public class TelaCadastro {
 		listaItens.add(jScrollPane);
 		/* FIM LISTAGEM ITENS  */
 		
+		JPanel painelBtn = new JPanel();
+		painelBtn.setLayout(new BoxLayout(painelBtn, BoxLayout.X_AXIS));
+		JButton btnSalvar = new JButton("Salvar");
+		painelBtn.add(btnSalvar);
+		
+		
 		JPanel pai = new JPanel();
 		pai.add(formularioNF);
 		pai.add(formularioPessoa);
 		pai.add(listaItens);
-		pai.setLayout(new BoxLayout(pai, BoxLayout.X_AXIS));
+		pai.add(painelBtn);
+		pai.setLayout(new BoxLayout(pai, BoxLayout.Y_AXIS));
 		
 		JFrame janela = new JFrame();
 		janela.setTitle("Cadastro");
