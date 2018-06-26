@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-public class Toolbar {
+public class ToolBar {
 		
 	private ActionListener removeAction;
 
