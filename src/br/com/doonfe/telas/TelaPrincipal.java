@@ -61,7 +61,7 @@ public class TelaPrincipal {
 
 	private JTable buildTabela() {
 		
-		Object[] colunas = new String[]{"N Nota", "Modelo", "Natureza", "Dt Emissão", "Destinatario", "Emitente"};
+		Object[] colunas = new String[]{"N Nota", "Modelo", "Natureza", "Dt EmissÃ£o", "Destinatario", "Emitente"};
 		Object[][] dados = new Object[][]{};
 		
 		DefaultTableModel model = new DefaultTableModel(dados, colunas);
@@ -101,11 +101,11 @@ public class TelaPrincipal {
 	private JMenuBar buildMenu() {
 		JMenuItem eMenuSair = new JMenuItem("Sair");
 		eMenuSair.setMnemonic(KeyEvent.VK_S);
-		eMenuSair.setToolTipText("Sair da Aplicação");
+		eMenuSair.setToolTipText("Sair da AplicaÃ§Ã£o");
 		eMenuSair.addActionListener((ActionEvent event) -> {
 		    System.exit(0);
 		});
-		// Opção incluir Nota Fiscal
+		// Opï¿½ï¿½o incluir Nota Fiscal
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
 		eMenuIncluirNota.setToolTipText("Incluir nova Nota Fiscal");
