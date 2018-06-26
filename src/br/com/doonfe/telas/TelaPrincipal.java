@@ -3,20 +3,17 @@ package br.com.doonfe.telas;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.componentes.MenuBar;
 import br.com.doonfe.componentes.ToolBar;
 import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.util.JPAUtil;
@@ -43,16 +40,15 @@ public class TelaPrincipal {
 		JScrollPane jScrollPane = new JScrollPane();
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		jScrollPane.setViewportView(table);
-				
 		
 		ToolBar toolbar = new ToolBar();
 		toolbar.setRemoveAction(ExcluirLinha);
-		JMenuBar menubar = buildMenu();
+		MenuBar menubar = new MenuBar();
 		
 		JFrame frame = new JFrame("Tela Inicial");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(toolbar.build(), BorderLayout.PAGE_START);
-		frame.setJMenuBar(menubar);
+		frame.setJMenuBar(menubar.build());
 		frame.add(jScrollPane);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
@@ -98,7 +94,7 @@ public class TelaPrincipal {
 
 	
 
-	private JMenuBar buildMenu() {
+	/*private JMenuBar buildMenu() {
 		JMenuItem eMenuSair = new JMenuItem("Sair");
 		eMenuSair.setMnemonic(KeyEvent.VK_S);
 		eMenuSair.setToolTipText("Sair da Aplicação");
@@ -126,6 +122,6 @@ public class TelaPrincipal {
 		menubar.add(fileCadastro);
 		menubar.add(fileSobre);
 		return menubar;
-	}
+	}*/
 
 }
