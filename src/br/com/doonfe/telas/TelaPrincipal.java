@@ -8,64 +8,20 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.componentes.Toolbar;
 import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.util.JPAUtil;
 
 public class TelaPrincipal {
-	
-	public static class MainToolBar {
-		
-		private ActionListener removeAction;
-
-		private ActionListener newAction;
-
-		private ActionListener editAction;
-
-		public JToolBar build(){
-			JButton btnNovo = new JButton();
-			btnNovo.setIcon(new ImageIcon(btnNovo.getClass().getResource("/images/novo.png")));
-			JButton btnEditar = new JButton();
-			btnEditar.setIcon(new ImageIcon(btnEditar.getClass().getResource("/images/editar.png")));
-			JButton btnExcluir = new JButton();
-			btnExcluir.setIcon(new ImageIcon(btnExcluir.getClass().getResource("/images/excluir.png")));
-			JButton btnDetalhes = new JButton();
-			btnDetalhes.setIcon(new ImageIcon(btnDetalhes.getClass().getResource("/images/detalhes.png")));
-			
-			if (removeAction != null){
-				btnExcluir.addActionListener(removeAction);
-			}
-			
-			if(newAction != null){
-				
-			}
-			
-			if(editAction != null){
-				
-			}
-			
-			JToolBar toolbar = new JToolBar("Barra de Ferramentas");
-			toolbar.add(btnNovo);
-			toolbar.add(btnEditar);
-			toolbar.add(btnExcluir);
-			toolbar.add(btnDetalhes);
-			
-			return toolbar;
-			
-		}
-	}
-	
 	
 	public void render(){
 		
@@ -89,8 +45,8 @@ public class TelaPrincipal {
 		jScrollPane.setViewportView(table);
 				
 		
-		MainToolBar toolbar = new MainToolBar();
-		toolbar.removeAction = ExcluirLinha;
+		Toolbar toolbar = new Toolbar();
+		toolbar.setRemoveAction(ExcluirLinha);
 		JMenuBar menubar = buildMenu();
 		
 		JFrame frame = new JFrame("Tela Inicial");
