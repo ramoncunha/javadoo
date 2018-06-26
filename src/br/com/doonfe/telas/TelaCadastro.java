@@ -74,7 +74,7 @@ public class TelaCadastro {
 					nf.setDataEmissao(Calendar.getInstance());
 					nf.setInformacoesComplementares(camposNota.getCampoInformacoesComplementares().getText());
 					
-					if(camposPessoa.getCampoInscricao1().getText() == "") {
+					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
 						PessoaFisica pessoaEmitente1 = new PessoaFisica();
 						pessoaEmitente1.setNome(camposPessoa.getCampoNome1().getText());
 						pessoaEmitente1.setCpf(camposPessoa.getCampoDocumento1().getText());
@@ -91,7 +91,7 @@ public class TelaCadastro {
 						persistNF.salvarPessoa(pessoaEmitente2);
 					}
 					
-					if(camposPessoa.getCampoInscricao2().getText() == "") {
+					if(camposPessoa.getCampoInscricao2().getText().equals("")) {
 						PessoaFisica pessoaDestinatario1 = new PessoaFisica();
 						pessoaDestinatario1.setNome(camposPessoa.getCampoNome2().getText());
 						pessoaDestinatario1.setCpf(camposPessoa.getCampoDocumento2().getText());
