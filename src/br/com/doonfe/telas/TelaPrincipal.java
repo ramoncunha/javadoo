@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import br.com.doonfe.componentes.Toolbar;
+import br.com.doonfe.componentes.ToolBar;
 import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.util.JPAUtil;
 
@@ -45,7 +45,7 @@ public class TelaPrincipal {
 		jScrollPane.setViewportView(table);
 				
 		
-		Toolbar toolbar = new Toolbar();
+		ToolBar toolbar = new ToolBar();
 		toolbar.setRemoveAction(ExcluirLinha);
 		JMenuBar menubar = buildMenu();
 		
@@ -105,7 +105,7 @@ public class TelaPrincipal {
 		eMenuSair.addActionListener((ActionEvent event) -> {
 		    System.exit(0);
 		});
-		// Op��o incluir Nota Fiscal
+		// Opção incluir Nota Fiscal
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
 		eMenuIncluirNota.setToolTipText("Incluir nova Nota Fiscal");
