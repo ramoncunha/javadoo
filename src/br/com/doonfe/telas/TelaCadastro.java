@@ -18,6 +18,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.componentes.MenuBar;
 import br.com.doonfe.modelo.Itens;
 import br.com.doonfe.util.JPAUtil;
 
@@ -170,10 +171,13 @@ public class TelaCadastro {
 		jScrollPanePai.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		jScrollPanePai.setViewportView(pai);
 		
+		MenuBar menubar = new MenuBar();
+		
 		JFrame janela = new JFrame();
 		janela.setTitle("Cadastro");
 		janela.setSize(800, 600);
 		janela.add(jScrollPanePai);
+		janela.setJMenuBar(menubar.build());
 		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		janela.setVisible(true);
 	}
