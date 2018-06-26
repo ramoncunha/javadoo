@@ -20,4 +20,9 @@ public class PessoaJuridica extends Pessoa {
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
+	
+	@Override
+	public String toString() {
+		return razaoSocial;
+	}
 }
