@@ -13,6 +13,7 @@ public class FormularioNotaFiscal {
 	private JTextField campoNatureza = new JTextField(10);
 	private JTextField campoDtOperacao = new JTextField(10);
 	private JTextField campoDtEmissao = new JTextField(10);
+	private JTextField campoInformacoesComplementares = new JTextField(20);
 	
 	public JTextField getCampoNNota() {
 		return campoNNota;
@@ -32,8 +33,13 @@ public class FormularioNotaFiscal {
 	public void setCampoDtEmissao(JTextField campoDtEmissao) {
 		this.campoDtEmissao = campoDtEmissao;
 	}
-
-
+	public JTextField getCampoInformacoesComplementares() {
+		return campoInformacoesComplementares;
+	}
+	public void setCampoInformacoesComplementares(JTextField campoInformacoesComplementares) {
+		this.campoInformacoesComplementares = campoInformacoesComplementares;
+	}
+	
 	public JPanel buildFormularioNF() {
 		
 		JPanel camposNota = new JPanel();
@@ -52,6 +58,8 @@ public class FormularioNotaFiscal {
 		camposNota.add(campoDtOperacao);
 		camposNota.add(new JLabel("Data da Emissão"));
 		camposNota.add(campoDtEmissao);
+		camposNota.add(new JLabel("Informações Complementares"));
+		camposNota.add(campoInformacoesComplementares);
 		
 		return camposNota;
 	}
