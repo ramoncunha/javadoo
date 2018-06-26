@@ -2,7 +2,9 @@ package br.com.doonfe.dao;
 
 import javax.persistence.EntityManager;
 
+import br.com.doonfe.modelo.Itens;
 import br.com.doonfe.modelo.NotaFiscal;
+import br.com.doonfe.modelo.Pessoa;
 import br.com.doonfe.util.JPAUtil;
 
 public class NotaFiscalDAO {
@@ -20,4 +22,25 @@ public class NotaFiscalDAO {
 		
 	}
 	
+	public void salvarPessoa(Pessoa pessoa) {
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		em.persist(pessoa);
+		
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void salvarItens(Itens item) {
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		em.persist(item);
+		
+		em.getTransaction().commit();
+		em.close();
+	}
 }
