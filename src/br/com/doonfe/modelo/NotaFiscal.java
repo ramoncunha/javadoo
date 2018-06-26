@@ -30,13 +30,14 @@ public class NotaFiscal {
 	private Calendar dataOperacao;
 	private Calendar dataEmissao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa emitente;
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa destinatario;
 	
-	@ManyToMany
-	private List<Itens> itens;
+	@ManyToMany(cascade=CascadeType.ALL)
+	private List<Itens> itens = new LinkedList<>();
 	
 	private String informacoesComplementares;
 	
