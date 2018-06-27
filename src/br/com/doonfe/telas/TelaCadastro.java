@@ -20,8 +20,6 @@ import br.com.doonfe.componentes.MenuBar;
 import br.com.doonfe.componentes.TabelaCadastroItemNF;
 import br.com.doonfe.dao.NotaFiscalDAO;
 import br.com.doonfe.modelo.Itens;
-import br.com.doonfe.modelo.ModeloNF;
-import br.com.doonfe.modelo.NaturezaNF;
 import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.modelo.PessoaFisica;
 import br.com.doonfe.modelo.PessoaJuridica;
@@ -86,41 +84,21 @@ public class TelaCadastro {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
-					NotaFiscal nf = new NotaFiscal();
-					nf.setNumeroNota(Integer.parseInt(camposNota.getCampoNNota().getText()));
-					nf.setNatureza(NaturezaNF.VENDA);
-					nf.setModelo(ModeloNF.MODELO1_A);
-					nf.setDataOperacao(Calendar.getInstance());
-					nf.setDataEmissao(Calendar.getInstance());
-					nf.setInformacoesComplementares(camposNota.getCampoInformacoesComplementares().getText());
+					NotaFiscal nf = camposNota.toNotaFiscal();
 					
 					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
-						PessoaFisica pessoaEmitente1 = new PessoaFisica();
-						pessoaEmitente1.setNome(camposPessoa.getCampoNome1().getText());
-						pessoaEmitente1.setCpf(camposPessoa.getCampoDocumento1().getText());
-						pessoaEmitente1.setEstado(camposPessoa.getCampoEstado1().getText());
+						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
 						nf.setEmitente(pessoaEmitente1);
 					} else {
-						PessoaJuridica pessoaEmitente2 = new PessoaJuridica();
-						pessoaEmitente2.setCnpj(camposPessoa.getCampoDocumento1().getText());
-						pessoaEmitente2.setInscricaoEstadual(camposPessoa.getCampoInscricao1().getText());
-						pessoaEmitente2.setRazaoSocial(camposPessoa.getCampoNome1().getText());
-						pessoaEmitente2.setEstado(camposPessoa.getCampoEstado1().getText());
+						PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
 						nf.setEmitente(pessoaEmitente2);
 					}
 					
 					if(camposPessoa.getCampoInscricao2().getText().equals("")) {
-						PessoaFisica pessoaDestinatario1 = new PessoaFisica();
-						pessoaDestinatario1.setNome(camposPessoa.getCampoNome2().getText());
-						pessoaDestinatario1.setCpf(camposPessoa.getCampoDocumento2().getText());
-						pessoaDestinatario1.setEstado(camposPessoa.getCampoEstado2().getText());
+						PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
 						nf.setDestinatario(pessoaDestinatario1);
 					} else {
-						PessoaJuridica pessoaDestinatario2 = new PessoaJuridica();
-						pessoaDestinatario2.setCnpj(camposPessoa.getCampoDocumento2().getText());
-						pessoaDestinatario2.setInscricaoEstadual(camposPessoa.getCampoInscricao2().getText());
-						pessoaDestinatario2.setRazaoSocial(camposPessoa.getCampoNome2().getText());
-						pessoaDestinatario2.setEstado(camposPessoa.getCampoEstado2().getText());
+						PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
 						nf.setDestinatario(pessoaDestinatario2);
 					}
 					
@@ -164,23 +142,4 @@ public class TelaCadastro {
 		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		janela.setVisible(true);
 	}
-
-	/*private JScrollPane buildTabelaItensNF() {
-		/* Lista de Itens 
-		Object[] colunas = new String[]{"Código", "Descrição", "Preço", "Qtd", "Total"};
-		Object[][] dados = new Object[][]{};
-		
-		DefaultTableModel model = new DefaultTableModel(dados, colunas);
-	
-		
-		JTable table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(model);
-		
-		JScrollPane jScrollPane = new JScrollPane();
-		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		jScrollPane.setViewportView(table);
-		/* FIM LISTAGEM ITENS  
-		return jScrollPane;
-	}*/
 }
