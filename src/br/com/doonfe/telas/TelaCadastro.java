@@ -60,7 +60,10 @@ public class TelaCadastro {
 				}catch(Exception e) {
 					System.out.println(e);
 				}
-				
+				camposItem.getCampoCodigo().setText("");
+				camposItem.getCampoDescricao().setText("");
+				camposItem.getCampoPreco().setText("");
+				camposItem.getCampoQtd().setText("");
 			}
 		};
 		camposItem.setNewAction(salvarItem);
