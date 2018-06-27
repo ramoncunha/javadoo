@@ -45,7 +45,6 @@ public class TelaCadastro {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					System.out.println("Entrou");
 					Integer codigoItem = Integer.parseInt(camposItem.getCampoCodigo().getText());
 					String descricao = camposItem.getCampoDescricao().getText();
 					Double preco = Double.parseDouble(camposItem.getCampoPreco().getText());
@@ -102,14 +101,25 @@ public class TelaCadastro {
 						nf.setDestinatario(pessoaDestinatario2);
 					}
 					
-					Itens item1 = new Itens();
-					item1.setCodigo(1789);
-					item1.setDescricao("Biscoito");
-					item1.setQuantidade(5);
-					item1.setValor(50.0);
-					nf.setItens(Arrays.asList(item1));
-					
-					//nf.addItem(item1);
+					/* Navegando nas linhas */
+					for(int i=0; i < tabelaItem.getModel().getRowCount(); i++) {
+						Itens itemLinha = new Itens();
+						/* Navegando nas colunas */
+						for(int j=0; j < 4; j++) {
+							String valorColuna = (String) tabelaItem.getModel().getValueAt(i, j);
+							
+							if(j == 0) {
+								itemLinha.setCodigo(Integer.parseInt(valorColuna));
+							} else if(j == 1) {
+								itemLinha.setDescricao(valorColuna);
+							} else if(j == 2) {
+								itemLinha.setValor(Double.parseDouble(valorColuna));
+							} else if(j == 3) {
+								itemLinha.setQuantidade(Integer.parseInt(valorColuna));
+							}
+						}
+						nf.addItem(itemLinha);
+					}
 					
 					persistNF.salvarNotaFiscal(nf);
 					
