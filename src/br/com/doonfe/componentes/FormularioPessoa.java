@@ -6,6 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.com.doonfe.modelo.PessoaFisica;
+import br.com.doonfe.modelo.PessoaJuridica;
+
 public class FormularioPessoa {
 
 	/* Campos Formulário Pessoa */
@@ -103,5 +106,43 @@ public class FormularioPessoa {
 		paiPanel.add(destinatarioPanel);
 		
 		return paiPanel;
+	}
+	
+	public PessoaFisica toPessoaFisica1() {
+		PessoaFisica pessoaFisica1 = new PessoaFisica();
+		pessoaFisica1.setNome(getCampoNome1().getText());
+		pessoaFisica1.setCpf(getCampoDocumento1().getText());
+		pessoaFisica1.setEstado(getCampoEstado1().getText());
+		
+		return pessoaFisica1;
+	}
+	
+	public PessoaFisica toPessoaFisica2() {
+		PessoaFisica pessoaFisica2 = new PessoaFisica();
+		pessoaFisica2.setNome(getCampoNome2().getText());
+		pessoaFisica2.setCpf(getCampoDocumento2().getText());
+		pessoaFisica2.setEstado(getCampoEstado2().getText());
+		
+		return pessoaFisica2;
+	}
+	
+	public PessoaJuridica toPessoaJuridica1() {
+		PessoaJuridica pessoaJuridica1 = new PessoaJuridica();
+		pessoaJuridica1.setCnpj(getCampoDocumento1().getText());
+		pessoaJuridica1.setInscricaoEstadual(getCampoInscricao1().getText());
+		pessoaJuridica1.setRazaoSocial(getCampoNome1().getText());
+		pessoaJuridica1.setEstado(getCampoEstado1().getText());
+		
+		return pessoaJuridica1;
+	}
+	
+	public PessoaJuridica toPessoaJuridica2 () {
+		PessoaJuridica pessoaJuridica2 = new PessoaJuridica();
+		pessoaJuridica2.setCnpj(getCampoDocumento2().getText());
+		pessoaJuridica2.setInscricaoEstadual(getCampoInscricao2().getText());
+		pessoaJuridica2.setRazaoSocial(getCampoNome2().getText());
+		pessoaJuridica2.setEstado(getCampoEstado2().getText());
+		
+		return pessoaJuridica2;
 	}
 }
