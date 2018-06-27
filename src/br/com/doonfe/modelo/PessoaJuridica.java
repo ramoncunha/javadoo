@@ -1,12 +1,18 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class PessoaJuridica extends Pessoa {
-
+	
+	@Column(nullable=false, length=14)
 	private String cnpj;
+	
+	@Column(nullable=false, length=200)
 	private String razaoSocial;
+	
+	@Column(nullable=false, length=20)
 	private String inscricaoEstadual;
 	
 	public String getCnpj() {

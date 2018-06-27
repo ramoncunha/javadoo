@@ -1,5 +1,6 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ public abstract class Pessoa {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(nullable=false, length=2)
 	private String estado;
 	
 	public Integer getId() {

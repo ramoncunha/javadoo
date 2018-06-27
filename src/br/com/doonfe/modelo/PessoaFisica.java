@@ -1,11 +1,15 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class PessoaFisica extends Pessoa {
 	
+	@Column(nullable=false, length=14)
 	private String cpf;
+	
+	@Column(nullable=false, length=200)
 	private String nome;
 	
 	public String getCpf() {

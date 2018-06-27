@@ -2,8 +2,6 @@ package br.com.doonfe.telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.Calendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -49,8 +47,8 @@ public class TelaCadastro {
 					String descricao = camposItem.getCampoDescricao().getText();
 					Double preco = Double.parseDouble(camposItem.getCampoPreco().getText());
 					Integer qtd = Integer.parseInt(camposItem.getCampoQtd().getText());
-					
-					tabelaItem.getModel().addRow(new Object[]{codigoItem, descricao, preco, qtd});
+					Double total = preco * qtd;
+					tabelaItem.getModel().addRow(new Object[]{codigoItem, descricao, preco, qtd, total});
 				}catch(Exception e) {
 					System.out.println(e);
 				}

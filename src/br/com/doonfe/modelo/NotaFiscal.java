@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,6 +22,7 @@ public class NotaFiscal {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(nullable=false)
 	private Integer numeroNota;
 	
 	@Enumerated(EnumType.STRING)
@@ -29,7 +31,10 @@ public class NotaFiscal {
 	@Enumerated(EnumType.STRING)
 	private NaturezaNF natureza;
 	
+	@Column(nullable=false)
 	private Calendar dataOperacao;
+	
+	@Column(nullable=false)
 	private Calendar dataEmissao;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -41,6 +46,7 @@ public class NotaFiscal {
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Itens> itens = new LinkedList<>();
 	
+	@Column(nullable=true, length=2048)
 	private String informacoesComplementares;
 	
 	public Integer getId() {

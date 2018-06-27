@@ -1,5 +1,6 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +12,14 @@ public class Itens {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private Integer codigo;
+	
+	@Column(length=200)
 	private String descricao;
+	
 	private Double preco;
+	
 	private Integer quantidade;
 	
 	public Integer getId() {
