@@ -4,11 +4,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*TelaPrincipal Main = new TelaPrincipal();
-		Main.render();*/
+		TelaPrincipal Main = new TelaPrincipal();
+		Main.render();
 	
-		TelaCadastro TelaCadastro = new TelaCadastro();
-		TelaCadastro.render();
+		/*TelaCadastro TelaCadastro = new TelaCadastro();
+		TelaCadastro.render();*/
 	}
 
 }

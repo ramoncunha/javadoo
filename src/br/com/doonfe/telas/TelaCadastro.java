@@ -120,7 +120,8 @@ public class TelaCadastro {
 					}
 					
 					persistNF.salvarNotaFiscal(nf);
-					
+					TelaPrincipal Main = new TelaPrincipal();
+					Main.render();
 				} catch (Exception e1) {
 					System.out.println(e1);
 				}

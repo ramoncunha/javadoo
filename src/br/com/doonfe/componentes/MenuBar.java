@@ -1,11 +1,14 @@
 package br.com.doonfe.componentes;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import br.com.doonfe.telas.TelaCadastro;
 
 public class MenuBar {
 	
@@ -24,6 +27,14 @@ public class MenuBar {
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
 		eMenuIncluirNota.setToolTipText("Incluir nova Nota Fiscal");
+		
+		eMenuIncluirNota.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro TelaCadastro = new TelaCadastro();
+				TelaCadastro.render();
+			}
+		});
 		// Aba Arquivo
 		JMenu fileArquivo = new JMenu("Arquivo");
 		fileArquivo.setMnemonic(KeyEvent.VK_F);
