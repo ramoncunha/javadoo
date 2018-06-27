@@ -1,8 +1,6 @@
 package br.com.doonfe.telas;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.action.GenericsAction;
+import br.com.doonfe.action.ToolBarAction;
 import br.com.doonfe.componentes.MenuBar;
 import br.com.doonfe.componentes.ToolBar;
 import br.com.doonfe.modelo.NotaFiscal;
@@ -24,26 +24,20 @@ public class TelaPrincipal {
 		
 		JTable table = buildTabela();
 		
-		ActionListener ExcluirLinha = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					int linha = table.getSelectedRow();
-					if(linha != -1)
-						((DefaultTableModel) table.getModel()).removeRow(linha);
-				} catch(ArrayIndexOutOfBoundsException e) {
-					System.out.println(e);
-				}
-			}
-		};
+		GenericsAction actionGeneric = new GenericsAction();
+		ToolBarAction actionToolBar = new ToolBarAction();
 		
 		JScrollPane jScrollPane = new JScrollPane();
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		jScrollPane.setViewportView(table);
 		
 		ToolBar toolbar = new ToolBar();
-		toolbar.setRemoveAction(ExcluirLinha);
+		toolbar.setRemoveAction(actionToolBar.excluirLinha(table));
+		toolbar.setNewAction(actionGeneric.novaNotaFiscal());
+		
 		MenuBar menubar = new MenuBar();
+		menubar.setNewAction(actionGeneric.novaNotaFiscal());
+		menubar.setTelaPrincipalAction(actionGeneric.navegarTelaPrincipal());
 		
 		JFrame frame = new JFrame("Tela Inicial");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -8,10 +8,24 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import br.com.doonfe.telas.TelaCadastro;
-
 public class MenuBar {
 	
+	private ActionListener newAction;
+	
+	private ActionListener telaPrincipalAction;
+	
+	private ActionListener sobreAction;
+	
+	public void setNewAction(ActionListener newAction) {
+		this.newAction = newAction;
+	}
+	public void setTelaPrincipalAction(ActionListener telaPrincipalAction) {
+		this.telaPrincipalAction = telaPrincipalAction;
+	}
+	public void setSobreAction(ActionListener sobreAction) {
+		this.sobreAction = sobreAction;
+	}
+
 	public JMenuBar build() {
 		JMenuItem eMenuSair = new JMenuItem("Sair");
 		eMenuSair.setMnemonic(KeyEvent.VK_S);
@@ -27,14 +41,6 @@ public class MenuBar {
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
 		eMenuIncluirNota.setToolTipText("Incluir nova Nota Fiscal");
-		
-		eMenuIncluirNota.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastro TelaCadastro = new TelaCadastro();
-				TelaCadastro.render();
-			}
-		});
 		// Aba Arquivo
 		JMenu fileArquivo = new JMenu("Arquivo");
 		fileArquivo.setMnemonic(KeyEvent.VK_F);
@@ -47,6 +53,19 @@ public class MenuBar {
 		// Aba Sobre
 		JMenu fileSobre = new JMenu("Sobre");
 		fileSobre.setMnemonic(KeyEvent.VK_S);
+		
+		if(newAction != null) {
+			eMenuIncluirNota.addActionListener(newAction);
+		}
+		
+		if(telaPrincipalAction != null) {
+			eMenuTelaPrincipal.addActionListener(telaPrincipalAction);
+		}
+		
+		if(sobreAction != null) {
+			
+		}
+		
 		// MENU BAR
 		JMenuBar menubar = new JMenuBar();
 		menubar.add(fileArquivo);

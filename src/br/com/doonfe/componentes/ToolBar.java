@@ -1,13 +1,12 @@
 package br.com.doonfe.componentes;
 
-import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-import br.com.doonfe.telas.TelaCadastro;
 
 public class ToolBar {
 		
@@ -29,19 +28,9 @@ public class ToolBar {
 		this.editAction = editAction;
 	}
 
-
 	public JToolBar build(){
 		JButton btnNovo = new JButton();
-		btnNovo.setIcon(new ImageIcon(btnNovo.getClass().getResource("/images/novo.png")));
-		
-		btnNovo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastro TelaCadastro = new TelaCadastro();
-				TelaCadastro.render();
-			}
-		});
-		
+		btnNovo.setIcon(new ImageIcon(btnNovo.getClass().getResource("/images/novo.png")));		
 		JButton btnEditar = new JButton();
 		btnEditar.setIcon(new ImageIcon(btnEditar.getClass().getResource("/images/editar.png")));
 		JButton btnExcluir = new JButton();
@@ -54,11 +43,11 @@ public class ToolBar {
 		}
 		
 		if(newAction != null){
-			
+			btnNovo.addActionListener(newAction);
 		}
 		
 		if(editAction != null){
-			
+			btnEditar.addActionListener(editAction);
 		}
 		
 		JToolBar toolbar = new JToolBar("Barra de Ferramentas");
