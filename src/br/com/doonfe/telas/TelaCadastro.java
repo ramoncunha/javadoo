@@ -56,7 +56,8 @@ public class TelaCadastro {
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogResult = JOptionPane.showConfirmDialog(null,"Você tem certeza que deseja cancelar?");
 				if(dialogResult == JOptionPane.YES_OPTION) {
-					// ir para tela principal
+					TelaPrincipal Main = new TelaPrincipal();
+					Main.render();
 				}
 			}
 		};
@@ -111,7 +112,7 @@ public class TelaCadastro {
 					item1.setValor(50.0);
 					nf.setItens(Arrays.asList(item1));
 					
-					nf.addItem(item1);
+					//nf.addItem(item1);
 					
 					persistNF.salvarNotaFiscal(nf);
 					
@@ -125,20 +126,21 @@ public class TelaCadastro {
 		painelBotoes.setCancelAction(cancelarCadastro);
 		painelBotoes.setSaveAction(salvarCadastro);
 		
+		JScrollPane jScrollPaneFormulario = new JScrollPane();
+		jScrollPaneFormulario.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jScrollPaneFormulario.setViewportView(formularioNF);
+		
 		JPanel pai = new JPanel();
-		pai.add(formularioNF);
+		pai.add(jScrollPaneFormulario);
 		pai.add(painelBotoes.buildBotaoFormulario());
 		pai.setLayout(new BoxLayout(pai, BoxLayout.Y_AXIS));
-		JScrollPane jScrollPanePai = new JScrollPane();
-		jScrollPanePai.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		jScrollPanePai.setViewportView(pai);
 		
 		MenuBar menubar = new MenuBar();
 		
 		JFrame janela = new JFrame();
 		janela.setTitle("Cadastro");
 		janela.setSize(800, 600);
-		janela.add(jScrollPanePai);
+		janela.add(pai);
 		janela.setJMenuBar(menubar.build());
 		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		janela.setVisible(true);
