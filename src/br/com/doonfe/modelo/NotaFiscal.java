@@ -1,8 +1,10 @@
 package br.com.doonfe.modelo;
 
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
