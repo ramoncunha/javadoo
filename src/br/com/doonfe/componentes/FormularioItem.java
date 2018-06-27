@@ -14,7 +14,7 @@ public class FormularioItem {
 	private JTextField campoDescricao = new JTextField(15);
 	private JTextField campoPreco = new JTextField(15);
 	private JTextField campoQtd = new JTextField(15);
-	private ActionListener newAction;
+	private ActionListener newItem;
 	
 	public JTextField getCampoCodigo() {
 		return campoCodigo;
@@ -40,8 +40,8 @@ public class FormularioItem {
 	public void setCampoQtd(JTextField campoQtd) {
 		this.campoQtd = campoQtd;
 	}	
-	public void setNewAction(ActionListener newAction) {
-		this.newAction = newAction;
+	public void setNewItem(ActionListener newItem) {
+		this.newItem = newItem;
 	}
 	
 	public JPanel buildFormularioItem() {
@@ -60,8 +60,8 @@ public class FormularioItem {
 		JButton salvarItem = new JButton("Inserir");
 		camposItem.add(salvarItem);
 		
-		if(newAction != null) {
-			salvarItem.addActionListener(newAction);
+		if(newItem != null) {
+			salvarItem.addActionListener(newItem);
 		}
 		
 		return camposItem;
