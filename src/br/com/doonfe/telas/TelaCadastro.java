@@ -106,16 +106,16 @@ public class TelaCadastro {
 						Itens itemLinha = new Itens();
 						/* Navegando nas colunas */
 						for(int j=0; j < 4; j++) {
-							String valorColuna = (String) tabelaItem.getModel().getValueAt(i, j);
+							Object valorColuna = tabelaItem.getModel().getValueAt(i, j);
 							
 							if(j == 0) {
-								itemLinha.setCodigo(Integer.parseInt(valorColuna));
+								itemLinha.setCodigo((Integer) (valorColuna));
 							} else if(j == 1) {
-								itemLinha.setDescricao(valorColuna);
+								itemLinha.setDescricao((String) valorColuna);
 							} else if(j == 2) {
-								itemLinha.setValor(Double.parseDouble(valorColuna));
+								itemLinha.setValor((Double) valorColuna);
 							} else if(j == 3) {
-								itemLinha.setQuantidade(Integer.parseInt(valorColuna));
+								itemLinha.setQuantidade((Integer) valorColuna);
 							}
 						}
 						nf.addItem(itemLinha);
