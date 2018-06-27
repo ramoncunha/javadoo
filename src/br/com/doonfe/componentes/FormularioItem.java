@@ -1,5 +1,7 @@
 package br.com.doonfe.componentes;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +14,7 @@ public class FormularioItem {
 	private JTextField campoDescricao = new JTextField(15);
 	private JTextField campoPreco = new JTextField(15);
 	private JTextField campoQtd = new JTextField(15);
+	private ActionListener newAction;
 	
 	public JTextField getCampoCodigo() {
 		return campoCodigo;
@@ -36,6 +39,9 @@ public class FormularioItem {
 	}
 	public void setCampoQtd(JTextField campoQtd) {
 		this.campoQtd = campoQtd;
+	}	
+	public void setNewAction(ActionListener newAction) {
+		this.newAction = newAction;
 	}
 	
 	public JPanel buildFormularioItem() {
@@ -53,6 +59,11 @@ public class FormularioItem {
 		camposItem.add(campoQtd);
 		JButton salvarItem = new JButton("Inserir");
 		camposItem.add(salvarItem);
+		
+		if(newAction != null) {
+			salvarItem.addActionListener(newAction);
+		}
+		
 		return camposItem;
 	}
 }

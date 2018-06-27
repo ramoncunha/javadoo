@@ -4,25 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
 
 import br.com.doonfe.componentes.BotaoCadastro;
 import br.com.doonfe.componentes.FormularioItem;
 import br.com.doonfe.componentes.FormularioNotaFiscal;
 import br.com.doonfe.componentes.FormularioPessoa;
 import br.com.doonfe.componentes.MenuBar;
+import br.com.doonfe.componentes.TabelaCadastroItemNF;
 import br.com.doonfe.dao.NotaFiscalDAO;
 import br.com.doonfe.modelo.Itens;
 import br.com.doonfe.modelo.ModeloNF;
@@ -30,7 +25,6 @@ import br.com.doonfe.modelo.NaturezaNF;
 import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.modelo.PessoaFisica;
 import br.com.doonfe.modelo.PessoaJuridica;
-import br.com.doonfe.util.JPAUtil;
 
 public class TelaCadastro {
 
@@ -48,8 +42,28 @@ public class TelaCadastro {
 		FormularioItem camposItem = new FormularioItem();
 		formularioNF.add(camposItem.buildFormularioItem());
 		
-		JScrollPane jScrollPane = listarItensNF();
+		TabelaCadastroItemNF tabelaItem = new TabelaCadastroItemNF();
+		JScrollPane jScrollPane = tabelaItem.buildTabela();		
 		formularioNF.add(jScrollPane);
+		
+		ActionListener salvarItem = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					System.out.println("Entrou");
+					Integer codigoItem = Integer.parseInt(camposItem.getCampoCodigo().getText());
+					String descricao = camposItem.getCampoDescricao().getText();
+					Double preco = Double.parseDouble(camposItem.getCampoPreco().getText());
+					Integer qtd = Integer.parseInt(camposItem.getCampoQtd().getText());
+					
+					tabelaItem.getModel().addRow(new Object[]{codigoItem, descricao, preco, qtd});
+				}catch(Exception e) {
+					System.out.println(e);
+				}
+				
+			}
+		};
+		camposItem.setNewAction(salvarItem);
 		
 		ActionListener cancelarCadastro = new ActionListener() {
 			@Override
@@ -146,32 +160,13 @@ public class TelaCadastro {
 		janela.setVisible(true);
 	}
 
-	private JScrollPane listarItensNF() {
-		/* Lista de Itens */
+	/*private JScrollPane buildTabelaItensNF() {
+		/* Lista de Itens 
 		Object[] colunas = new String[]{"Código", "Descrição", "Preço", "Qtd", "Total"};
 		Object[][] dados = new Object[][]{};
 		
 		DefaultTableModel model = new DefaultTableModel(dados, colunas);
-		
-		EntityManager em = JPAUtil.getEntityManager();
-		em.getTransaction().begin();
-		
-		String jpql = "select m from Itens m";
-		TypedQuery<Itens> query = em.createQuery(jpql, Itens.class);
-		
-		List<Itens> resultados = query.getResultList();
-		
-		for (Itens item : resultados) {
-			model.addRow(new Object[] {
-					item.getCodigo(),
-					item.getDescricao(),
-					item.getValor(),
-					item.getQuantidade()
-			});
-		}
-		
-		em.getTransaction().commit();
-		em.close();
+	
 		
 		JTable table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -180,7 +175,7 @@ public class TelaCadastro {
 		JScrollPane jScrollPane = new JScrollPane();
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		jScrollPane.setViewportView(table);
-		/* FIM LISTAGEM ITENS  */
+		/* FIM LISTAGEM ITENS  
 		return jScrollPane;
-	}
+	}*/
 }

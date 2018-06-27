@@ -1,9 +1,15 @@
 package br.com.doonfe.componentes;
 
+import java.util.Calendar;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import br.com.doonfe.modelo.ModeloNF;
+import br.com.doonfe.modelo.NaturezaNF;
+import br.com.doonfe.modelo.NotaFiscal;
 
 public class FormularioNotaFiscal {
 	
@@ -63,9 +69,16 @@ public class FormularioNotaFiscal {
 		
 		return camposNota;
 	}
-	//	public NotaFiscal toNotaFiscal() {
-//	NotaFiscal nf = new NotaFiscal();
-//	nf.setNatureza(campoNatureza.getText().toString());
-//	return nf;
-//}
+	
+	/*public NotaFiscal toNotaFiscal() {
+		NotaFiscal nf = new NotaFiscal();
+		nf.setNumeroNota(Integer.parseInt(getCampoNNota().getText()));
+		nf.setNatureza(NaturezaNF.VENDA);
+		nf.setModelo(ModeloNF.MODELO1_A);
+		nf.setDataOperacao(Calendar.getInstance());
+		nf.setDataEmissao(Calendar.getInstance());
+		nf.setInformacoesComplementares(getCampoInformacoesComplementares().getText());
+		
+		return nf;
+	}*/
 }
