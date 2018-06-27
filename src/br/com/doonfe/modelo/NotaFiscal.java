@@ -103,4 +103,7 @@ public class NotaFiscal {
 	public void setInformacoesComplementares(String informacoesComplementares) {
 		this.informacoesComplementares = informacoesComplementares;
 	}
+	public void addItem(Itens item) {
+		itens.add(item);
+	}
 }
