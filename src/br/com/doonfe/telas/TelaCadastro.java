@@ -40,11 +40,8 @@ public class TelaCadastro {
 		formularioNF.add(camposPessoa.buildFormularioPessoa());
 		
 		FormularioItem camposItem = new FormularioItem();
-		formularioNF.add(camposItem.buildFormularioItem());
 		
 		TabelaCadastroItemNF tabelaItem = new TabelaCadastroItemNF();
-		JScrollPane jScrollPane = tabelaItem.buildTabela();		
-		formularioNF.add(jScrollPane);
 		
 		ActionListener salvarItem = new ActionListener() {
 			@Override
@@ -66,7 +63,12 @@ public class TelaCadastro {
 				camposItem.getCampoQtd().setText("");
 			}
 		};
-		camposItem.setNewAction(salvarItem);
+		camposItem.setNewItem(salvarItem);
+		
+		formularioNF.add(camposItem.buildFormularioItem());
+		
+		JScrollPane jScrollPane = tabelaItem.buildTabela();		
+		formularioNF.add(jScrollPane);
 		
 		ActionListener cancelarCadastro = new ActionListener() {
 			@Override
