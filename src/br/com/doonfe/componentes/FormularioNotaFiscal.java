@@ -70,7 +70,7 @@ public class FormularioNotaFiscal {
 		return camposNota;
 	}
 	
-	/*public NotaFiscal toNotaFiscal() {
+	public NotaFiscal toNotaFiscal() {
 		NotaFiscal nf = new NotaFiscal();
 		nf.setNumeroNota(Integer.parseInt(getCampoNNota().getText()));
 		nf.setNatureza(NaturezaNF.VENDA);
@@ -80,5 +80,5 @@ public class FormularioNotaFiscal {
 		nf.setInformacoesComplementares(getCampoInformacoesComplementares().getText());
 		
 		return nf;
-	}*/
+	}
 }
