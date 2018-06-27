@@ -15,8 +15,10 @@ public class ToolBarAction {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					int linha = tabela.getSelectedRow();
-					if(linha != -1)
+					if(linha != -1) {
 						((DefaultTableModel) tabela.getModel()).removeRow(linha);
+						//System.out.println("Conteúdo -> " + tabela.getModel().getValueAt(linha, 0).toString());
+					}
 				} catch(ArrayIndexOutOfBoundsException e) {
 					System.out.println(e);
 				}
