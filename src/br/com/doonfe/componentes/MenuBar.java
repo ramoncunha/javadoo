@@ -24,6 +24,10 @@ public class MenuBar {
 		JMenuItem eMenuTelaPrincipal = new JMenuItem("Tela Principal");
 		eMenuTelaPrincipal.setMnemonic(KeyEvent.VK_T);
 		eMenuTelaPrincipal.setToolTipText("Navegar para Tela Principal");
+		//Opção ir para Tela Indicadores
+		JMenuItem eMenuTelaIndicadores = new JMenuItem("Tela Indicadores");
+		eMenuTelaIndicadores.setMnemonic(KeyEvent.VK_I);
+		eMenuTelaIndicadores.setToolTipText("Navegar para Tela de Indicadores");
 		// Opção incluir Nota Fiscal
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
@@ -35,6 +39,7 @@ public class MenuBar {
 		JMenu fileArquivo = new JMenu("Arquivo");
 		fileArquivo.setMnemonic(KeyEvent.VK_F);
 		fileArquivo.add(eMenuTelaPrincipal);
+		fileArquivo.add(eMenuTelaIndicadores);
 		fileArquivo.add(eMenuSair);
 		// Aba Cadastro
 		JMenu fileCadastro = new JMenu("Cadastro");
