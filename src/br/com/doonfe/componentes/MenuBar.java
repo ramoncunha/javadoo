@@ -28,6 +28,9 @@ public class MenuBar {
 		JMenuItem eMenuIncluirNota = new JMenuItem("Incluir Nota Fiscal");
 		eMenuIncluirNota.setMnemonic(KeyEvent.VK_N);
 		eMenuIncluirNota.setToolTipText("Incluir nova Nota Fiscal");
+		//Opção ir para Tela Sobre
+		JMenuItem eMenuTelaSobre = new JMenuItem("Sobre");
+		eMenuTelaSobre.setToolTipText("Navegar para Tela Sobre");
 		// Aba Arquivo
 		JMenu fileArquivo = new JMenu("Arquivo");
 		fileArquivo.setMnemonic(KeyEvent.VK_F);
@@ -40,11 +43,13 @@ public class MenuBar {
 		// Aba Sobre
 		JMenu fileSobre = new JMenu("Sobre");
 		fileSobre.setMnemonic(KeyEvent.VK_S);
+		fileSobre.add(eMenuTelaSobre);
 		
 		eMenuIncluirNota.addActionListener(actionGeneric.novaNotaFiscal());
 		
 		eMenuTelaPrincipal.addActionListener(actionGeneric.navegarTelaPrincipal());
 		
+		eMenuTelaSobre.addActionListener(actionGeneric.navegarTelaSobre());
 		
 		// MENU BAR
 		JMenuBar menubar = new JMenuBar();
