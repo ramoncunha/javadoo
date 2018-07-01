@@ -11,6 +11,7 @@ public class Main {
 		TelaCadastro.render();*/
 		
 		TelaSobre TelaSobre = new TelaSobre();
+		TelaSobre.render();
 	}
 
 }
