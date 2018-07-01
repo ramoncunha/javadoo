@@ -6,7 +6,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import br.com.doonfe.componentes.MenuBar;
@@ -37,13 +36,20 @@ public class TelaSobre {
 				+ " e Swing");
 		infTrabalho.setFont(fonteSubTitulos);
 		
+		JLabel quebraLinha1 = new JLabel("<html><br></html>");
+		JLabel quebraLinha2 = new JLabel("<html><br><br><br></html>");
+		JLabel quebraLinha3 = new JLabel("<html><br><br><br></html>");
+		
 		JPanel sobrePanel = new JPanel();
 		sobrePanel.setLayout(new BoxLayout(sobrePanel, BoxLayout.Y_AXIS));
 		sobrePanel.add(titulo);
+		sobrePanel.add(quebraLinha1);
 		sobrePanel.add(disciplinaTitulo);
+		sobrePanel.add(quebraLinha2);
 		sobrePanel.add(equipeCassio);
 		sobrePanel.add(equipeIcaro);
 		sobrePanel.add(equipeRamon);
+		sobrePanel.add(quebraLinha3);
 		sobrePanel.add(infTrabalho);
 		
 		JFrame janela = new JFrame();
