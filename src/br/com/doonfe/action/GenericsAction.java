@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import br.com.doonfe.telas.TelaCadastro;
 import br.com.doonfe.telas.TelaPrincipal;
+import br.com.doonfe.telas.TelaSobre;
 
 public class GenericsAction {
 	
@@ -30,5 +31,17 @@ public class GenericsAction {
 		};
 		
 		return telaPrincipal;
+	}
+	
+	public ActionListener navegarTelaSobre() {
+		ActionListener telaSobre = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TelaSobre TelaSobre = new TelaSobre();
+				TelaSobre.render();
+			}
+		};
+		
+		return telaSobre;
 	}
 }
