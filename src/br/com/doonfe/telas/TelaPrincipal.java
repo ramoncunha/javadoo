@@ -31,6 +31,7 @@ public class TelaPrincipal {
 		
 		ToolBar toolbar = new ToolBar();
 		toolbar.setRemoveAction(actionToolBar.excluirLinha(table));
+		toolbar.setEditAction(actionToolBar.editarLinha(table));
 		
 		MenuBar menubar = new MenuBar();
 		
@@ -46,7 +47,7 @@ public class TelaPrincipal {
 
 	private JTable buildTabela() {
 		
-		Object[] colunas = new String[]{"N Nota", "Modelo", "Natureza", "Dt Emissão", "Destinatario", "Emitente"};
+		Object[] colunas = new String[]{"ID", "N Nota", "Modelo", "Natureza", "Dt Emissão", "Destinatario", "Emitente"};
 		Object[][] dados = new Object[][]{};
 		
 		DefaultTableModel model = new DefaultTableModel(dados, colunas);
@@ -62,6 +63,7 @@ public class TelaPrincipal {
 		
 		for (NotaFiscal notaFiscal : resultados) {
 			model.addRow(new Object[] {
+					notaFiscal.getId(),
 					notaFiscal.getNumeroNota(),
 					notaFiscal.getModelo(),
 					notaFiscal.getNatureza(),
