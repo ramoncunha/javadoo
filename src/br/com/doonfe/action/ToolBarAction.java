@@ -37,13 +37,13 @@ public class ToolBarAction {
 				try {
 					int linha = tabela.getSelectedRow();
 					if(linha != -1) {
+						/* Seleciona o id do registro */
 						int valorId = (int) tabela.getModel().getValueAt(linha, 0);
-						
+						/* Exibe a nova tela de cadastro com o id da nf */
 						TelaCadastro TelaCadastro = new TelaCadastro();
 						TelaCadastro.setEditarNf(valorId);
 						TelaCadastro.render();
 						
-						System.out.println("Conteúdo -> " + valorId);
 					}
 				} catch(ArrayIndexOutOfBoundsException er) {
 					System.out.println(er);
