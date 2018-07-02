@@ -23,6 +23,12 @@ import br.com.doonfe.modelo.PessoaFisica;
 import br.com.doonfe.modelo.PessoaJuridica;
 
 public class TelaCadastro {
+	
+	private Integer editarNf;	
+
+	public void setEditarNf(Integer editarNf) {
+		this.editarNf = editarNf;
+	}
 
 	public void render() {
 		
