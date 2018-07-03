@@ -8,12 +8,15 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.doonfe.componentes.MenuBar;
+import br.com.doonfe.dao.IndicadoresDAO;
 
 public class TelaIndicadores {
 	
 	public void render() {
 		
 		MenuBar menubar = new MenuBar();
+		
+		IndicadoresDAO consultaValor = new IndicadoresDAO(); 
 		
 		JTable table = new JTable();
 		
@@ -23,7 +26,7 @@ public class TelaIndicadores {
 		
 		Object[] colunas = new String[]{"Indicador", "Valor"};
 		Object[][] dados = new Object[][]{
-			{"Total de Notas Fiscais cadastradas", ""},
+			{"Total de Notas Fiscais cadastradas", consultaValor.totalNotasFicaisCadastradas()},
 			{"Média de valor das notas",""},
 			{"Média de valor dos itens das notas",""},
 			{"Maior valor de nota",""},
