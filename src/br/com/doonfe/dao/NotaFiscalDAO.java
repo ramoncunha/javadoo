@@ -37,4 +37,18 @@ public class NotaFiscalDAO {
 		return registroNf;
 	}
 	
+	public NotaFiscal alterarNotaFiscal(NotaFiscal notaFiscal) {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		em.merge(notaFiscal);
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return notaFiscal;
+	}
+	
 }
