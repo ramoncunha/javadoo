@@ -121,6 +121,10 @@ public class TelaCadastro {
 				try {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = camposNota.toNotaFiscal();
+					/* Se for editavel */
+					if(editarNf != null) {
+						nf.setId(editarNf);
+					}
 					
 					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
 						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();

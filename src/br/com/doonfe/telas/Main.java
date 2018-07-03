@@ -12,6 +12,9 @@ public class Main {
 		
 		/*TelaSobre TelaSobre = new TelaSobre();
 		TelaSobre.render();*/
+		
+		/*TelaIndicadores TelaIndicadores = new TelaIndicadores();
+		TelaIndicadores.render();*/
 	}
 
 }
