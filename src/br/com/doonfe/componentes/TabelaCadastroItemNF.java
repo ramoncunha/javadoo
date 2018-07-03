@@ -5,13 +5,20 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.modelo.Itens;
+
 public class TabelaCadastroItemNF {
 	
 	private DefaultTableModel model;
+	private JTable table = new JTable();
 
 	public DefaultTableModel getModel() {
 		return model;
 	}
+	public JTable getTable() {
+		return table;
+	}
+
 
 	public JScrollPane buildTabela() {
 		/* Lista de Itens */
@@ -20,7 +27,6 @@ public class TabelaCadastroItemNF {
 		
 		this.model = new DefaultTableModel(dados, colunas);
 		
-		JTable table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(model);
 		
@@ -29,6 +35,16 @@ public class TabelaCadastroItemNF {
 		jScrollPane.setViewportView(table);
 		/* FIM LISTAGEM ITENS  */
 		return jScrollPane;
+	}
+	
+	public void setItemNF(Itens i) {
+		Integer codigo = i.getCodigo();
+		String descricao = i.getDescricao();
+		Double preco = i.getValor();
+		Integer qtd = i.getQuantidade();
+		Double total = preco * qtd;
+
+		getModel().addRow(new Object[]{codigo, descricao, preco, qtd, total});
 	}
 	
 }
