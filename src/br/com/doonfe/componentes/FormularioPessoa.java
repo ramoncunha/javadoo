@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.com.doonfe.modelo.Pessoa;
 import br.com.doonfe.modelo.PessoaFisica;
 import br.com.doonfe.modelo.PessoaJuridica;
 
@@ -144,5 +145,35 @@ public class FormularioPessoa {
 		pessoaJuridica2.setEstado(getCampoEstado2().getText());
 		
 		return pessoaJuridica2;
+	}
+	
+	public void setEmitente(Pessoa p) {
+		if(p instanceof PessoaFisica) {
+			PessoaFisica pf = (PessoaFisica) p;
+			campoDocumento1.setText(pf.getCpf());
+			campoNome1.setText(pf.getNome());
+			campoEstado1.setText(pf.getEstado());
+		} else if(p instanceof PessoaJuridica) {
+			PessoaJuridica pj = (PessoaJuridica) p;
+			campoDocumento1.setText(pj.getCnpj());
+			campoNome1.setText(pj.getRazaoSocial());
+			campoInscricao1.setText(pj.getInscricaoEstadual());
+			campoEstado1.setText(pj.getEstado());
+		}
+	}
+	
+	public void setDestinatario(Pessoa p) {
+		if(p instanceof PessoaFisica) {
+			PessoaFisica pf = (PessoaFisica) p;
+			campoDocumento2.setText(pf.getCpf());
+			campoNome2.setText(pf.getNome());
+			campoEstado2.setText(pf.getEstado());
+		} else if(p instanceof PessoaJuridica) {
+			PessoaJuridica pj = (PessoaJuridica) p;
+			campoDocumento2.setText(pj.getCnpj());
+			campoNome2.setText(pj.getRazaoSocial());
+			campoInscricao2.setText(pj.getInscricaoEstadual());
+			campoEstado2.setText(pj.getEstado());
+		}
 	}
 }
