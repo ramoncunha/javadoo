@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.action.GenericsAction;
 import br.com.doonfe.action.ToolBarAction;
 import br.com.doonfe.componentes.MenuBar;
 import br.com.doonfe.componentes.ToolBar;
@@ -23,6 +24,7 @@ public class TelaPrincipal {
 		
 		JTable table = buildTabela();
 		
+		GenericsAction actionGenerics = new GenericsAction();
 		ToolBarAction actionToolBar = new ToolBarAction();
 		
 		JScrollPane jScrollPane = new JScrollPane();
@@ -32,6 +34,7 @@ public class TelaPrincipal {
 		ToolBar toolbar = new ToolBar();
 		toolbar.setRemoveAction(actionToolBar.excluirLinha(table));
 		toolbar.setEditAction(actionToolBar.editarLinha(table));
+		toolbar.setNewAction(actionGenerics.novaNotaFiscal());
 		
 		MenuBar menubar = new MenuBar();
 		
