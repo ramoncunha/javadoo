@@ -2,6 +2,7 @@ package br.com.doonfe.telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -34,27 +35,16 @@ public class TelaCadastro {
 		
 		JPanel formularioNF = new JPanel();
 		formularioNF.setLayout(new BoxLayout(formularioNF, BoxLayout.Y_AXIS));
-		
+		/* build formulário da nota fiscal */
 		FormularioNotaFiscal camposNota = new FormularioNotaFiscal();
 		formularioNF.add(camposNota.buildFormularioNF());
-		
+		/* build formulário do emitente/destinatario */
 		FormularioPessoa camposPessoa = new FormularioPessoa();
 		formularioNF.add(camposPessoa.buildFormularioPessoa());
-		
+		/* build formulário itens */
 		FormularioItem camposItem = new FormularioItem();
-		
+		/* build tabela dos itens */
 		TabelaCadastroItemNF tabelaItem = new TabelaCadastroItemNF();
-		
-		if(editarNf != null) {
-			NotaFiscalDAO persistNF = new NotaFiscalDAO();
-			NotaFiscal nfEditavel = persistNF.editarNotaFiscal(editarNf);
-			
-			camposNota.setNotaFiscal(nfEditavel);
-			
-			camposPessoa.setEmitente(nfEditavel.getEmitente());
-			camposPessoa.setDestinatario(nfEditavel.getDestinatario());
-			
-		}
 		
 		ActionListener salvarItem = new ActionListener() {
 			@Override
@@ -75,12 +65,44 @@ public class TelaCadastro {
 				camposItem.getCampoQtd().setText("");
 			}
 		};
+		
+		ActionListener removerItem = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Integer linha = tabelaItem.getTable().getSelectedRow();
+					if(linha != -1) {
+						tabelaItem.getModel().removeRow(linha);
+					}
+				} catch(Exception e) {
+					System.out.println(e);
+				}
+			}
+		};
+		/* Setando ação dos botões dos itens */
 		camposItem.setNewItem(salvarItem);
+		camposItem.setRemoveItem(removerItem);
 		
 		formularioNF.add(camposItem.buildFormularioItem());
 		
 		JScrollPane jScrollPane = tabelaItem.buildTabela();		
 		formularioNF.add(jScrollPane);
+		
+		/* Se houver ID para editar uma nota */
+		if(editarNf != null) {
+			NotaFiscalDAO persistNF = new NotaFiscalDAO();
+			NotaFiscal nfEditavel = persistNF.editarNotaFiscal(editarNf);
+			
+			camposNota.setNotaFiscal(nfEditavel);
+			
+			camposPessoa.setEmitente(nfEditavel.getEmitente());
+			camposPessoa.setDestinatario(nfEditavel.getDestinatario());
+			
+			List<Itens> itens = nfEditavel.getItens();
+			for (Itens itens2 : itens) {
+				tabelaItem.setItemNF(itens2);
+			}
+		}
 		
 		ActionListener cancelarCadastro = new ActionListener() {
 			@Override
@@ -144,7 +166,7 @@ public class TelaCadastro {
 				}
 			}
 		};
-		
+		/* Setando ação dos botoões do cadastro de Nota Fiscal */
 		BotaoCadastro painelBotoes = new BotaoCadastro();
 		painelBotoes.setCancelAction(cancelarCadastro);
 		painelBotoes.setSaveAction(salvarCadastro);
