@@ -121,10 +121,6 @@ public class TelaCadastro {
 				try {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = camposNota.toNotaFiscal();
-					/* Se for editavel */
-					if(editarNf != null) {
-						nf.setId(editarNf);
-					}
 					
 					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
 						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
@@ -161,8 +157,14 @@ public class TelaCadastro {
 						}
 						nf.addItem(itemLinha);
 					}
+					/* Se for editavel */
+					if(editarNf != null) {
+						nf.setId(editarNf);
+						persistNF.alterarNotaFiscal(nf);
+					} else {
+						persistNF.salvarNotaFiscal(nf);
+					}
 					
-					persistNF.salvarNotaFiscal(nf);
 					TelaPrincipal Main = new TelaPrincipal();
 					Main.render();
 				} catch (Exception e1) {
