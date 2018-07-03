@@ -1,5 +1,6 @@
 package br.com.doonfe.componentes;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ public class FormularioItem {
 	private JTextField campoPreco = new JTextField(15);
 	private JTextField campoQtd = new JTextField(15);
 	private ActionListener newItem;
+	private ActionListener removeItem;
 	
 	public JTextField getCampoCodigo() {
 		return campoCodigo;
@@ -43,6 +45,9 @@ public class FormularioItem {
 	public void setNewItem(ActionListener newItem) {
 		this.newItem = newItem;
 	}
+	public void setRemoveItem(ActionListener removeItem) {
+		this.removeItem = removeItem;
+	}
 	
 	public JPanel buildFormularioItem() {
 		/* JPanel Item */
@@ -57,13 +62,28 @@ public class FormularioItem {
 		camposItem.add(campoPreco);
 		camposItem.add(new JLabel("Quantidade"));
 		camposItem.add(campoQtd);
+		
+		JPanel botoesItem = new JPanel();
+		botoesItem.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JButton salvarItem = new JButton("Inserir");
-		camposItem.add(salvarItem);
+		botoesItem.add(salvarItem);
+		JButton removerItem = new JButton("Remover");
+		botoesItem.add(removerItem);
+		
+		
+		JPanel paiItem = new JPanel();
+		paiItem.setLayout(new BoxLayout(paiItem, BoxLayout.Y_AXIS));
+		paiItem.add(camposItem);
+		paiItem.add(botoesItem);
 		
 		if(newItem != null) {
 			salvarItem.addActionListener(newItem);
 		}
 		
-		return camposItem;
+		if(removeItem != null) {
+			removerItem.addActionListener(removeItem);
+		}
+		
+		return paiItem;
 	}
 }
