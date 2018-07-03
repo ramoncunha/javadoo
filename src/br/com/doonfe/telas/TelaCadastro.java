@@ -19,7 +19,6 @@ import br.com.doonfe.componentes.TabelaCadastroItemNF;
 import br.com.doonfe.dao.NotaFiscalDAO;
 import br.com.doonfe.modelo.Itens;
 import br.com.doonfe.modelo.NotaFiscal;
-import br.com.doonfe.modelo.Pessoa;
 import br.com.doonfe.modelo.PessoaFisica;
 import br.com.doonfe.modelo.PessoaJuridica;
 
@@ -49,24 +48,11 @@ public class TelaCadastro {
 		if(editarNf != null) {
 			NotaFiscalDAO persistNF = new NotaFiscalDAO();
 			NotaFiscal nfEditavel = persistNF.editarNotaFiscal(editarNf);
-						
-			camposNota.getCampoNNota().setText(String.valueOf(nfEditavel.getNumeroNota()));
-			camposNota.getCampoDtOperacao().setText(String.valueOf(nfEditavel.getDataEmissao()));
-			camposNota.getCampoDtOperacao().setText("");
-			camposNota.getCampoInformacoesComplementares().setText(nfEditavel.getInformacoesComplementares());
 			
-			//PessoaFisica emitenteFisica = persistNF.getPessoaFisica(nfEditavel.getEmitente().getId());
-			PessoaJuridica emitenteJuridica = persistNF.getPessoaJuridica(nfEditavel.getEmitente().getId());
+			camposNota.setNotaFiscal(nfEditavel);
 			
-		
-			camposPessoa.getCampoDocumento1().setText(emitenteJuridica.getCnpj());
-			
-			
-			camposPessoa.getCampoNome1().setText(nfEditavel.getEmitente().toString());
-			camposPessoa.getCampoEstado1().setText(nfEditavel.getEmitente().getEstado());
-			
-			camposPessoa.getCampoNome2().setText(nfEditavel.getDestinatario().toString());
-			camposPessoa.getCampoEstado2().setText(nfEditavel.getDestinatario().getEstado());
+			camposPessoa.setEmitente(nfEditavel.getEmitente());
+			camposPessoa.setDestinatario(nfEditavel.getDestinatario());
 			
 		}
 		
