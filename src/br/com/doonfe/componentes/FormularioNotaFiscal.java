@@ -81,4 +81,11 @@ public class FormularioNotaFiscal {
 		
 		return nf;
 	}
+	
+	public void setNotaFiscal(NotaFiscal nf) {
+		campoNNota.setText(String.valueOf(nf.getNumeroNota()));
+		campoDtOperacao.setText(String.valueOf(nf.getDataEmissao()));
+		campoDtOperacao.setText("");
+		campoInformacoesComplementares.setText(nf.getInformacoesComplementares());
+	}
 }
