@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import br.com.doonfe.telas.TelaCadastro;
+import br.com.doonfe.telas.TelaIndicadores;
 import br.com.doonfe.telas.TelaPrincipal;
 import br.com.doonfe.telas.TelaSobre;
 
@@ -43,5 +44,17 @@ public class GenericsAction {
 		};
 		
 		return telaSobre;
+	}
+	
+	public ActionListener navegarTelaIndicadores() {
+		ActionListener telaIndicadores = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				TelaIndicadores TelaIndicadores = new TelaIndicadores();
+				TelaIndicadores.render();
+			}
+		};
+		
+		return telaIndicadores;
 	}
 }

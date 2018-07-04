@@ -56,6 +56,8 @@ public class MenuBar {
 		
 		eMenuTelaSobre.addActionListener(actionGeneric.navegarTelaSobre());
 		
+		eMenuTelaIndicadores.addActionListener(actionGeneric.navegarTelaIndicadores());
+		
 		// MENU BAR
 		JMenuBar menubar = new JMenuBar();
 		menubar.add(fileArquivo);
