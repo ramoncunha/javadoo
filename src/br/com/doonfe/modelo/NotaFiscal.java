@@ -1,6 +1,5 @@
 package br.com.doonfe.modelo;
 
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,10 +32,10 @@ public class NotaFiscal {
 	private NaturezaNF natureza;
 	
 	@Column(nullable=false)
-	private Calendar dataOperacao;
+	private String dataOperacao;
 	
 	@Column(nullable=false)
-	private Calendar dataEmissao;
+	private String dataEmissao;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa emitente;
@@ -44,7 +43,7 @@ public class NotaFiscal {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa destinatario;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal", orphanRemoval=true, fetch=FetchType.EAGER)
 	private List<Itens> itens = new LinkedList<>();
 	
 	@Column(nullable=true, length=2048)
@@ -74,16 +73,16 @@ public class NotaFiscal {
 	public void setNatureza(NaturezaNF natureza) {
 		this.natureza = natureza;
 	}
-	public Calendar getDataOperacao() {
+	public String getDataOperacao() {
 		return dataOperacao;
 	}
-	public void setDataOperacao(Calendar dataOperacao) {
+	public void setDataOperacao(String dataOperacao) {
 		this.dataOperacao = dataOperacao;
 	}
-	public Calendar getDataEmissao() {
+	public String getDataEmissao() {
 		return dataEmissao;
 	}
-	public void setDataEmissao(Calendar dataEmissao) {
+	public void setDataEmissao(String dataEmissao) {
 		this.dataEmissao = dataEmissao;
 	}
 	public Pessoa getEmitente() {

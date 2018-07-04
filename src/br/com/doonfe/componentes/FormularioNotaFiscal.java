@@ -1,7 +1,5 @@
 package br.com.doonfe.componentes;
 
-import java.util.Calendar;
-
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -75,8 +73,8 @@ public class FormularioNotaFiscal {
 		nf.setNumeroNota(Integer.parseInt(getCampoNNota().getText()));
 		nf.setNatureza(NaturezaNF.VENDA);
 		nf.setModelo(ModeloNF.MODELO1_A);
-		nf.setDataOperacao(Calendar.getInstance());
-		nf.setDataEmissao(Calendar.getInstance());
+		nf.setDataOperacao(getCampoDtOperacao().getText());
+		nf.setDataEmissao(getCampoDtEmissao().getText());
 		nf.setInformacoesComplementares(getCampoInformacoesComplementares().getText());
 		
 		return nf;
@@ -84,8 +82,8 @@ public class FormularioNotaFiscal {
 	
 	public void setNotaFiscal(NotaFiscal nf) {
 		campoNNota.setText(String.valueOf(nf.getNumeroNota()));
-		campoDtOperacao.setText(String.valueOf(nf.getDataEmissao()));
-		campoDtOperacao.setText("");
+		campoDtOperacao.setText(nf.getDataOperacao());
+		campoDtEmissao.setText(nf.getDataEmissao());
 		campoInformacoesComplementares.setText(nf.getInformacoesComplementares());
 	}
 }

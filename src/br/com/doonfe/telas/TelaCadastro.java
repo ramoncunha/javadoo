@@ -182,12 +182,19 @@ public class TelaCadastro {
 								itemLinha.setQuantidade((Integer) valorColuna);
 							}
 						}
-						if(nfEditavel.getItens().get(i).getCodigo() == itemLinha.getCodigo()) {
-							itemLinha.setId(nfEditavel.getItens().get(i).getId());
-						} else {
-							itemLinha.setNotaFiscal(nf);
-							nf.addItem(itemLinha);
-						}						
+						
+						if(nf.getId() != null) {
+							
+							for(int k = 0; k < nfEditavel.getItens().size(); k++) {
+								if(nfEditavel.getItens().get(k).getCodigo() == itemLinha.getCodigo()) {
+									itemLinha.setId(nfEditavel.getItens().get(k).getId());
+								}
+							}
+							
+						}
+						
+						itemLinha.setNotaFiscal(nf);
+						nf.addItem(itemLinha);
 					}
 					
 					if(editarNf != null) {
