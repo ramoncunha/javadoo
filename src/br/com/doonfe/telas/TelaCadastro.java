@@ -182,8 +182,12 @@ public class TelaCadastro {
 								itemLinha.setQuantidade((Integer) valorColuna);
 							}
 						}
-						nf.addItem(itemLinha);
-						itemLinha.setNotaFiscal(nf);
+						if(nfEditavel.getItens().get(i).getCodigo() == itemLinha.getCodigo()) {
+							itemLinha.setId(nfEditavel.getItens().get(i).getId());
+						} else {
+							itemLinha.setNotaFiscal(nf);
+							nf.addItem(itemLinha);
+						}						
 					}
 					
 					if(editarNf != null) {

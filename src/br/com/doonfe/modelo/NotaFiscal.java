@@ -44,7 +44,7 @@ public class NotaFiscal {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa destinatario;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal", orphanRemoval=true, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal", fetch=FetchType.EAGER)
 	private List<Itens> itens = new LinkedList<>();
 	
 	@Column(nullable=true, length=2048)
