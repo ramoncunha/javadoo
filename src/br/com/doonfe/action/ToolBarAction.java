@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.doonfe.dao.NotaFiscalDAO;
 import br.com.doonfe.telas.TelaCadastro;
 
 public class ToolBarAction {
@@ -17,7 +18,10 @@ public class ToolBarAction {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					int linha = tabela.getSelectedRow();
+					NotaFiscalDAO removerNf = new NotaFiscalDAO();
 					if(linha != -1) {
+						int valorId = (int) tabela.getModel().getValueAt(linha, 0);
+						removerNf.removerNotaFiscal(valorId);
 						((DefaultTableModel) tabela.getModel()).removeRow(linha);
 					}
 				} catch(ArrayIndexOutOfBoundsException e) {

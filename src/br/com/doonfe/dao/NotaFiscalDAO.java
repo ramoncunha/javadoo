@@ -51,4 +51,19 @@ public class NotaFiscalDAO {
 		return notaFiscal;
 	}
 	
+	public void removerNotaFiscal(Integer id) {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		NotaFiscal nfRemovida = em.find(NotaFiscal.class, id);
+		
+		em.remove(nfRemovida);
+		
+		em.getTransaction().commit();
+		em.close();
+		
+	}
+	
 }

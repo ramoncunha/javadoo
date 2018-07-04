@@ -121,47 +121,46 @@ public class TelaCadastro {
 				try {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = camposNota.toNotaFiscal();
-					
-					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
-						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
-						nf.setEmitente(pessoaEmitente1);
-					} else {
-						PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
-						nf.setEmitente(pessoaEmitente2);
-					}
-					
-					if(camposPessoa.getCampoInscricao2().getText().equals("")) {
-						PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
-						nf.setDestinatario(pessoaDestinatario1);
-					} else {
-						PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
-						nf.setDestinatario(pessoaDestinatario2);
-					}
-					
-					/* Navegando nas linhas */
-					for(int i=0; i < tabelaItem.getModel().getRowCount(); i++) {
-						Itens itemLinha = new Itens();
-						/* Navegando nas colunas */
-						for(int j=0; j < 4; j++) {
-							Object valorColuna = tabelaItem.getModel().getValueAt(i, j);
-							
-							if(j == 0) {
-								itemLinha.setCodigo((Integer) (valorColuna));
-							} else if(j == 1) {
-								itemLinha.setDescricao((String) valorColuna);
-							} else if(j == 2) {
-								itemLinha.setValor((Double) valorColuna);
-							} else if(j == 3) {
-								itemLinha.setQuantidade((Integer) valorColuna);
-							}
-						}
-						nf.addItem(itemLinha);
-					}
-					/* Se for editavel */
 					if(editarNf != null) {
 						nf.setId(editarNf);
 						persistNF.alterarNotaFiscal(nf);
 					} else {
+						if(camposPessoa.getCampoInscricao1().getText().equals("")) {
+							PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
+							nf.setEmitente(pessoaEmitente1);
+						} else {
+							PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
+							nf.setEmitente(pessoaEmitente2);
+						}
+						
+						if(camposPessoa.getCampoInscricao2().getText().equals("")) {
+							PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
+							nf.setDestinatario(pessoaDestinatario1);
+						} else {
+							PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
+							nf.setDestinatario(pessoaDestinatario2);
+						}
+						
+						/* Navegando nas linhas */
+						for(int i=0; i < tabelaItem.getModel().getRowCount(); i++) {
+							Itens itemLinha = new Itens();
+							/* Navegando nas colunas */
+							for(int j=0; j < 4; j++) {
+								Object valorColuna = tabelaItem.getModel().getValueAt(i, j);
+								
+								if(j == 0) {
+									itemLinha.setCodigo((Integer) (valorColuna));
+								} else if(j == 1) {
+									itemLinha.setDescricao((String) valorColuna);
+								} else if(j == 2) {
+									itemLinha.setValor((Double) valorColuna);
+								} else if(j == 3) {
+									itemLinha.setQuantidade((Integer) valorColuna);
+								}
+							}
+							nf.addItem(itemLinha);
+						}
+						
 						persistNF.salvarNotaFiscal(nf);
 					}
 					
