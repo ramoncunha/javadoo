@@ -122,45 +122,72 @@ public class TelaCadastro {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = camposNota.toNotaFiscal();
 					if(editarNf != null) {
-						nf.setId(editarNf);
-						persistNF.alterarNotaFiscal(nf);
-					} else {
-						if(camposPessoa.getCampoInscricao1().getText().equals("")) {
-							PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
-							nf.setEmitente(pessoaEmitente1);
+						nf.setId(editarNf);	
+					}
+					
+					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
+						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
+						
+						if(nf.getId() != null) {
+							pessoaEmitente1.setId(nf.getEmitente().getId());
 						} else {
-							PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
+							nf.setEmitente(pessoaEmitente1);
+						}
+						
+					} else {
+						PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
+						
+						if(nf.getId() != null) {
+							pessoaEmitente2.setId(nf.getEmitente().getId());
+						} else {
 							nf.setEmitente(pessoaEmitente2);
 						}
+					}
+					
+					if(camposPessoa.getCampoInscricao2().getText().equals("")) {
 						
-						if(camposPessoa.getCampoInscricao2().getText().equals("")) {
-							PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
-							nf.setDestinatario(pessoaDestinatario1);
+						PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
+						
+						if(nf.getId() != null) {
+							pessoaDestinatario1.setId(nf.getDestinatario().getId());
 						} else {
-							PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
+							nf.setDestinatario(pessoaDestinatario1);
+						}
+						
+					} else {
+						
+						PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
+						
+						if(nf.getId() != null) {
+							pessoaDestinatario2.setId(nf.getDestinatario().getId());
+						} else {
 							nf.setDestinatario(pessoaDestinatario2);
 						}
-						
-						/* Navegando nas linhas */
-						for(int i=0; i < tabelaItem.getModel().getRowCount(); i++) {
-							Itens itemLinha = new Itens();
-							/* Navegando nas colunas */
-							for(int j=0; j < 4; j++) {
-								Object valorColuna = tabelaItem.getModel().getValueAt(i, j);
-								
-								if(j == 0) {
-									itemLinha.setCodigo((Integer) (valorColuna));
-								} else if(j == 1) {
-									itemLinha.setDescricao((String) valorColuna);
-								} else if(j == 2) {
-									itemLinha.setValor((Double) valorColuna);
-								} else if(j == 3) {
-									itemLinha.setQuantidade((Integer) valorColuna);
-								}
+					}
+					
+					/* Navegando nas linhas */
+					for(int i=0; i < tabelaItem.getModel().getRowCount(); i++) {
+						Itens itemLinha = new Itens();
+						/* Navegando nas colunas */
+						for(int j=0; j < 4; j++) {
+							Object valorColuna = tabelaItem.getModel().getValueAt(i, j);
+							
+							if(j == 0) {
+								itemLinha.setCodigo((Integer) (valorColuna));
+							} else if(j == 1) {
+								itemLinha.setDescricao((String) valorColuna);
+							} else if(j == 2) {
+								itemLinha.setValor((Double) valorColuna);
+							} else if(j == 3) {
+								itemLinha.setQuantidade((Integer) valorColuna);
 							}
-							nf.addItem(itemLinha);
 						}
-						
+						nf.addItem(itemLinha);
+					}
+					
+					if(editarNf != null) {
+						persistNF.alterarNotaFiscal(nf);
+					} else {
 						persistNF.salvarNotaFiscal(nf);
 					}
 					
