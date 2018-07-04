@@ -37,7 +37,7 @@ public class TabelaCadastroItemNF {
 		return jScrollPane;
 	}
 	
-	public void setItemNF(Itens i) {
+	public void addItemNF(Itens i) {
 		Integer codigo = i.getCodigo();
 		String descricao = i.getDescricao();
 		Double preco = i.getValor();
