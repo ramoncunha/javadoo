@@ -57,4 +57,10 @@ public class Itens {
 	public void setValor(Double valor) {
 		this.preco = valor;
 	}
+	public NotaFiscal getNotaFiscal() {
+		return notaFiscal;
+	}
+	public void setNotaFiscal(NotaFiscal notaFiscal) {
+		this.notaFiscal = notaFiscal;
+	}
 }
