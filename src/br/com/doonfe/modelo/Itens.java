@@ -1,10 +1,12 @@
 package br.com.doonfe.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Itens {
@@ -21,6 +23,9 @@ public class Itens {
 	private Double preco;
 	
 	private Integer quantidade;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private NotaFiscal notaFiscal;
 	
 	public Integer getId() {
 		return id;
