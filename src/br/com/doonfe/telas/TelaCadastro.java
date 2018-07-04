@@ -183,6 +183,7 @@ public class TelaCadastro {
 							}
 						}
 						nf.addItem(itemLinha);
+						itemLinha.setNotaFiscal(nf);
 					}
 					
 					if(editarNf != null) {
