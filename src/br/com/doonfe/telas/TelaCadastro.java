@@ -88,11 +88,11 @@ public class TelaCadastro {
 		JScrollPane jScrollPane = tabelaItem.buildTabela();		
 		formularioNF.add(jScrollPane);
 		
-		/* Se houver ID para editar uma nota */
-		if(editarNf != null) {
-			NotaFiscalDAO persistNF = new NotaFiscalDAO();
-			NotaFiscal nfEditavel = persistNF.editarNotaFiscal(editarNf);
-			
+		/* Quando houver ID para editar uma nota */
+		NotaFiscalDAO verificaEdicao = new NotaFiscalDAO();
+		NotaFiscal nfEditavel = verificaEdicao.editarNotaFiscal(editarNf);
+		
+		if(nfEditavel != null) {
 			camposNota.setNotaFiscal(nfEditavel);
 			
 			camposPessoa.setEmitente(nfEditavel.getEmitente());
@@ -100,7 +100,7 @@ public class TelaCadastro {
 			
 			List<Itens> itens = nfEditavel.getItens();
 			for (Itens itens2 : itens) {
-				tabelaItem.setItemNF(itens2);
+				tabelaItem.addItemNF(itens2);
 			}
 		}
 		
@@ -122,26 +122,26 @@ public class TelaCadastro {
 					NotaFiscalDAO persistNF = new NotaFiscalDAO();
 					NotaFiscal nf = camposNota.toNotaFiscal();
 					if(editarNf != null) {
-						nf.setId(editarNf);	
+						nf.setId(editarNf);
 					}
 					
 					if(camposPessoa.getCampoInscricao1().getText().equals("")) {
 						PessoaFisica pessoaEmitente1 = camposPessoa.toPessoaFisica1();
 						
 						if(nf.getId() != null) {
-							pessoaEmitente1.setId(nf.getEmitente().getId());
-						} else {
-							nf.setEmitente(pessoaEmitente1);
+							pessoaEmitente1.setId(nfEditavel.getEmitente().getId());
 						}
+						
+						nf.setEmitente(pessoaEmitente1);
 						
 					} else {
 						PessoaJuridica pessoaEmitente2 = camposPessoa.toPessoaJuridica1();
 						
 						if(nf.getId() != null) {
-							pessoaEmitente2.setId(nf.getEmitente().getId());
-						} else {
-							nf.setEmitente(pessoaEmitente2);
+							pessoaEmitente2.setId(nfEditavel.getEmitente().getId());
 						}
+						
+						nf.setEmitente(pessoaEmitente2);
 					}
 					
 					if(camposPessoa.getCampoInscricao2().getText().equals("")) {
@@ -149,20 +149,20 @@ public class TelaCadastro {
 						PessoaFisica pessoaDestinatario1 = camposPessoa.toPessoaFisica2();
 						
 						if(nf.getId() != null) {
-							pessoaDestinatario1.setId(nf.getDestinatario().getId());
-						} else {
-							nf.setDestinatario(pessoaDestinatario1);
+							pessoaDestinatario1.setId(nfEditavel.getDestinatario().getId());
 						}
+						
+						nf.setDestinatario(pessoaDestinatario1);
 						
 					} else {
 						
 						PessoaJuridica pessoaDestinatario2 = camposPessoa.toPessoaJuridica2();
 						
 						if(nf.getId() != null) {
-							pessoaDestinatario2.setId(nf.getDestinatario().getId());
-						} else {
-							nf.setDestinatario(pessoaDestinatario2);
+							pessoaDestinatario2.setId(nfEditavel.getDestinatario().getId());
 						}
+						
+						nf.setDestinatario(pessoaDestinatario2);
 					}
 					
 					/* Navegando nas linhas */
