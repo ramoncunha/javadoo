@@ -9,11 +9,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class NotaFiscal {
@@ -43,7 +44,7 @@ public class NotaFiscal {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Pessoa destinatario;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal", orphanRemoval=true, fetch=FetchType.EAGER)
 	private List<Itens> itens = new LinkedList<>();
 	
 	@Column(nullable=true, length=2048)
