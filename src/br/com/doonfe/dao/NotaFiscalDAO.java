@@ -22,16 +22,20 @@ public class NotaFiscalDAO {
 	
 	public NotaFiscal editarNotaFiscal(Integer id) {
 		
-		EntityManager em = JPAUtil.getEntityManager();
+		if(id != null) {
+			EntityManager em = JPAUtil.getEntityManager();
+			
+			em.getTransaction().begin();
+			
+			NotaFiscal registroNf = em.find(NotaFiscal.class, id);
+			
+			em.getTransaction().commit();
+			em.close();
+			
+			return registroNf;
+		}
 		
-		em.getTransaction().begin();
-		
-		NotaFiscal registroNf = em.find(NotaFiscal.class, id);
-		
-		em.getTransaction().commit();
-		em.close();
-		
-		return registroNf;
+		return null;
 	}
 	
 	public NotaFiscal alterarNotaFiscal(NotaFiscal notaFiscal) {
