@@ -30,10 +30,10 @@ public class TelaIndicadores {
 			{"Média de valor das notas", consultaValor.mediaValorNotas()},
 			{"Média de valor dos itens das notas",consultaValor.mediaValorItens()},
 			{"Maior valor de nota", consultaValor.maiorValorNota()},
-			{"Estado com maior número de notas emitidas", ""},
-			{"Estado com maior número de notas como destinatário",""},
-			{"empresa que é a maior compradora em volume de vendas",""},
-			{"empresa que é a maior vendedora em volume de vendas",""},
+			{"Estado com maior número de notas emitidas", consultaValor.estadoEmiteNf()},
+			{"Estado com maior número de notas como destinatário",consultaValor.estadoDestinoNf()},
+			{"Empresa que é a maior compradora em volume de vendas",consultaValor.destinatarioComprador()},
+			{"Empresa que é a maior vendedora em volume de vendas",""},
 			{"Total de notas com valor superior a 10 mil",""},
 			{"Total de notas com mais de 10 itens",""}
 			};

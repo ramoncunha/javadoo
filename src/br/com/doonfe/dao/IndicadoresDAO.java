@@ -75,4 +75,55 @@ public class IndicadoresDAO {
 		return maiorValorNota;
 	}
 	
+	public String estadoEmiteNf() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+
+		em.getTransaction().begin();
+		
+		String jpql = "select p.estado from Pessoa p, NotaFiscal nf where nf.emitente = p.id group by p.estado";
+		Query query = em.createQuery(jpql);
+		
+		String estado = (String) query.setMaxResults(1).getSingleResult();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return estado;
+	}
+	
+	public String estadoDestinoNf() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+
+		em.getTransaction().begin();
+		
+		String jpql = "select p.estado from Pessoa p, NotaFiscal nf where nf.destinatario = p.id group by p.estado";
+		Query query = em.createQuery(jpql);
+		
+		String estado = (String) query.setMaxResults(1).getSingleResult();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return estado;
+	}
+	
+	public String destinatarioComprador() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+
+		em.getTransaction().begin();
+		
+		String jpql = "select count(i.id) as vezes, pj.razaoSocial from PessoaJuridica pj, NotaFiscal nf, Itens i "
+				+ "where nf.destinatario = pj.id and nf.id = i.notaFiscal group by pj.id order by vezes desc";
+		Query query = em.createQuery(jpql);
+		
+		String estado = (String) query.setMaxResults(1).getSingleResult();
+		
+		em.getTransaction().commit();
+		em.close();		
+		
+		return estado;
+	}
 }
