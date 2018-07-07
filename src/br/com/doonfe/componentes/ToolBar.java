@@ -35,8 +35,6 @@ public class ToolBar {
 		btnEditar.setIcon(new ImageIcon(btnEditar.getClass().getResource("/images/editar.png")));
 		JButton btnExcluir = new JButton();
 		btnExcluir.setIcon(new ImageIcon(btnExcluir.getClass().getResource("/images/excluir.png")));
-		JButton btnDetalhes = new JButton();
-		btnDetalhes.setIcon(new ImageIcon(btnDetalhes.getClass().getResource("/images/detalhes.png")));
 		
 		if (removeAction != null){
 			btnExcluir.addActionListener(removeAction);
@@ -54,7 +52,6 @@ public class ToolBar {
 		toolbar.add(btnNovo);
 		toolbar.add(btnEditar);
 		toolbar.add(btnExcluir);
-		toolbar.add(btnDetalhes);
 		
 		return toolbar;
 		
