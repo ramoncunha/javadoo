@@ -1,7 +1,10 @@
 package br.com.doonfe.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.doonfe.util.JPAUtil;
 
@@ -145,20 +148,42 @@ public class IndicadoresDAO {
 		return estado;
 	}
 	
-	public Long notasMaiorDez() {
+	public Integer notasSuperiorDezMil() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		String jpql = "select i.preco*i.quantidade as total from Itens i group by i.notaFiscal order by total desc";
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return null;
+	}
+	
+	
+	public Integer notasMaiorDez() {
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		
 		em.getTransaction().begin();
 		
 		String jpql = "select count(nf.id) from NotaFiscal nf, Itens i where nf = i.notaFiscal group by nf.id";
-		Query query = em.createQuery(jpql);
+		TypedQuery<Long> query = em.createQuery(jpql, Long.class);
 		
-		Long nNotas = (Long) query.setMaxResults(1).getSingleResult();
+		List<Long> nNotas =  query.getResultList();
+		
+		Integer qtdItem = 0;
+		
+		for (Long long1 : nNotas) {
+			if(long1 > 10)
+				qtdItem++;
+		}
 		
 		em.getTransaction().commit();
 		em.close();
 		
-		return nNotas;
+		return qtdItem;
 	}
 }
