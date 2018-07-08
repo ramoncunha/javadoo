@@ -81,7 +81,7 @@ public class IndicadoresDAO {
 
 		em.getTransaction().begin();
 		
-		String jpql = "select p.estado from Pessoa p, NotaFiscal nf where nf.emitente = p.id group by p.estado";
+		String jpql = "select max(p.estado) from Pessoa p, NotaFiscal nf where nf.emitente = p.id group by p.estado";
 		Query query = em.createQuery(jpql);
 		
 		String estado = (String) query.setMaxResults(1).getSingleResult();
@@ -98,7 +98,7 @@ public class IndicadoresDAO {
 
 		em.getTransaction().begin();
 		
-		String jpql = "select p.estado from Pessoa p, NotaFiscal nf where nf.destinatario = p.id group by p.estado";
+		String jpql = "select max(p.estado) from Pessoa p, NotaFiscal nf where nf.destinatario = p.id group by p.estado";
 		Query query = em.createQuery(jpql);
 		
 		String estado = (String) query.setMaxResults(1).getSingleResult();
@@ -115,8 +115,8 @@ public class IndicadoresDAO {
 
 		em.getTransaction().begin();
 		
-		String jpql = "select count(i.id) as vezes, pj.razaoSocial from PessoaJuridica pj, NotaFiscal nf, Itens i "
-				+ "where nf.destinatario = pj.id and nf.id = i.notaFiscal group by pj.id order by vezes desc";
+		String jpql = "select max(pj.razaoSocial) from PessoaJuridica pj, NotaFiscal nf, Itens i "
+				+ "where nf.destinatario = pj.id and nf.id = i.notaFiscal group by pj.id";
 		Query query = em.createQuery(jpql);
 		
 		String estado = (String) query.setMaxResults(1).getSingleResult();
@@ -125,5 +125,40 @@ public class IndicadoresDAO {
 		em.close();		
 		
 		return estado;
+	}
+	
+	public String emitenteComprador() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+
+		em.getTransaction().begin();
+		
+		String jpql = "select max(pj.razaoSocial) from PessoaJuridica pj, NotaFiscal nf, Itens i "
+				+ "where nf.emitente = pj.id and nf.id = i.notaFiscal group by pj.id";
+		Query query = em.createQuery(jpql);
+		
+		String estado = (String) query.setMaxResults(1).getSingleResult();
+		
+		em.getTransaction().commit();
+		em.close();		
+		
+		return estado;
+	}
+	
+	public Long notasMaiorDez() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		String jpql = "select count(nf.id) from NotaFiscal nf, Itens i where nf = i.notaFiscal group by nf.id";
+		Query query = em.createQuery(jpql);
+		
+		Long nNotas = (Long) query.setMaxResults(1).getSingleResult();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return nNotas;
 	}
 }
