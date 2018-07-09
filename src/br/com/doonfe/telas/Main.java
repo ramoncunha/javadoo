@@ -4,17 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*TelaPrincipal Main = new TelaPrincipal();
-		Main.render();*/
-	
-		/*TelaCadastro TelaCadastro = new TelaCadastro();
-		TelaCadastro.render();*/
+		TelaPrincipal Main = new TelaPrincipal();
+		Main.render();
 		
-		/*TelaSobre TelaSobre = new TelaSobre();
-		TelaSobre.render();*/
-		
-		TelaIndicadores TelaIndicadores = new TelaIndicadores();
-		TelaIndicadores.render();
 	}
 
 }
