@@ -43,14 +43,14 @@ public class TelaPrincipal {
 		frame.getContentPane().add(toolbar.build(), BorderLayout.PAGE_START);
 		frame.setJMenuBar(menubar.build());
 		frame.add(jScrollPane);
-		frame.setSize(800, 600);
+		frame.setSize(900, 600);
 		frame.setVisible(true);
 		
 	}
 
 	private JTable buildTabela() {
 		
-		Object[] colunas = new String[]{"ID", "N Nota", "Modelo", "Natureza", "Dt Emissão", "Destinatario", "Emitente"};
+		Object[] colunas = new String[]{"ID", "Nº Nota", "Modelo", "Natureza", "Destinatario", "Emitente", "Qtd Item", "Valor"};
 		Object[][] dados = new Object[][]{};
 		
 		DefaultTableModel model = new DefaultTableModel(dados, colunas);
@@ -70,9 +70,10 @@ public class TelaPrincipal {
 					notaFiscal.getNumeroNota(),
 					notaFiscal.getModelo(),
 					notaFiscal.getNatureza(),
-					notaFiscal.getDataEmissao(),
 					notaFiscal.getDestinatario(),
-					notaFiscal.getEmitente()
+					notaFiscal.getEmitente(),
+					notaFiscal.getQtdItem(),
+					notaFiscal.getValorItens()
 			});
 		}
 		
