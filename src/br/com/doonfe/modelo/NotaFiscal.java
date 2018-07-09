@@ -112,4 +112,20 @@ public class NotaFiscal {
 	public void addItem(Itens item) {
 		itens.add(item);
 	}
+	public Double getValorItens() {
+		Double total = 0.0;
+		for (Itens itens2 : itens) {
+			total += itens2.getQuantidade()*itens2.getValor();
+		}
+		
+		return total;
+	}
+	public Integer getQtdItem() {
+		Integer qtdItem = 0;
+		for (int i = 0; i < itens.size(); i++) {
+			qtdItem++;
+		}
+		
+		return qtdItem;
+	}
 }

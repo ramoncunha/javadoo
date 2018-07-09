@@ -34,7 +34,7 @@ public class TelaIndicadores {
 			{"Estado com maior número de notas como destinatário",consultaValor.estadoDestinoNf()},
 			{"Empresa que é a maior compradora em volume de vendas",consultaValor.destinatarioComprador()},
 			{"Empresa que é a maior vendedora em volume de vendas",consultaValor.emitenteComprador()},
-			{"Total de notas com valor superior a 10 mil",""},
+			{"Total de notas com valor superior a 10 mil",consultaValor.notasSuperiorDezMil()},
 			{"Total de notas com mais de 10 itens",consultaValor.notasMaiorDez()}
 			};
 		

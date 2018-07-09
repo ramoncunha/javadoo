@@ -6,9 +6,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.doonfe.modelo.NotaFiscal;
 import br.com.doonfe.util.JPAUtil;
 
 public class IndicadoresDAO {
+	
+	public List<NotaFiscal> getNotasFiscais() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		String jpql = "select nf from NotaFiscal nf";
+		TypedQuery<NotaFiscal> query = em.createQuery(jpql, NotaFiscal.class);
+		
+		List<NotaFiscal> notaFiscal = query.getResultList();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return notaFiscal;
+	}
 	
 	public Long totalNotasFicaisCadastradas() {
 		
@@ -150,39 +168,28 @@ public class IndicadoresDAO {
 	
 	public Integer notasSuperiorDezMil() {
 		
-		EntityManager em = JPAUtil.getEntityManager();
+		Integer supeiorDezMil = 0;
+		List<NotaFiscal> nf = getNotasFiscais();
 		
-		em.getTransaction().begin();
+		for (NotaFiscal notaFiscal : nf) {
+			if(notaFiscal.getValorItens() > 10000d) {
+				supeiorDezMil++;
+			}
+		}
 		
-		String jpql = "select i.preco*i.quantidade as total from Itens i group by i.notaFiscal order by total desc";
-		
-		em.getTransaction().commit();
-		em.close();
-		
-		return null;
+		return supeiorDezMil;
 	}
-	
 	
 	public Integer notasMaiorDez() {
 		
-		EntityManager em = JPAUtil.getEntityManager();
-		
-		em.getTransaction().begin();
-		
-		String jpql = "select count(nf.id) from NotaFiscal nf, Itens i where nf = i.notaFiscal group by nf.id";
-		TypedQuery<Long> query = em.createQuery(jpql, Long.class);
-		
-		List<Long> nNotas =  query.getResultList();
-		
 		Integer qtdItem = 0;
+		List<NotaFiscal> nf = getNotasFiscais();
 		
-		for (Long long1 : nNotas) {
-			if(long1 > 10)
+		for (NotaFiscal notaFiscal : nf) {
+			if(notaFiscal.getQtdItem() > 10) {
 				qtdItem++;
+			}
 		}
-		
-		em.getTransaction().commit();
-		em.close();
 		
 		return qtdItem;
 	}

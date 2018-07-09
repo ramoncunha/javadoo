@@ -27,7 +27,7 @@ public class TelaSobre {
 		
 		JLabel equipeCassio = new JLabel("- Cássio Zanganelli");
 		equipeCassio.setFont(fonteSubTitulos);
-		JLabel equipeIcaro = new JLabel("- Ícaro");
+		JLabel equipeIcaro = new JLabel("- Ícaro Ferreira");
 		equipeIcaro.setFont(fonteSubTitulos);
 		JLabel equipeRamon = new JLabel("- Ramon Pires");
 		equipeRamon.setFont(fonteSubTitulos);
