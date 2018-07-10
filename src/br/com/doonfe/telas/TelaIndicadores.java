@@ -43,7 +43,7 @@ public class TelaIndicadores {
 		table.setModel(model);
 		
 		JFrame frame = new JFrame("Tela Indicadores");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setJMenuBar(menubar.build());
 		frame.add(scrollTabela);
 		frame.setSize(800, 600);

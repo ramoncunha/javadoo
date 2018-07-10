@@ -57,7 +57,7 @@ public class TelaSobre {
 		janela.setSize(800, 600);
 		janela.add(sobrePanel);
 		janela.setJMenuBar(menubar.build());
-		janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		janela.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		janela.setVisible(true);
 	}
 	

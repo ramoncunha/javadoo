@@ -39,7 +39,7 @@ public class TelaPrincipal {
 		MenuBar menubar = new MenuBar();
 		
 		JFrame frame = new JFrame("Tela Inicial");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(toolbar.build(), BorderLayout.PAGE_START);
 		frame.setJMenuBar(menubar.build());
 		frame.add(jScrollPane);
